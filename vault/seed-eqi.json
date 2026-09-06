@@ -1,0 +1,3590 @@
+[
+ {
+  "title": "Vector",
+  "domain": "Mathematics",
+  "one_line": "A vector is an ordered list of numbers that adds coordinate by coordinate and scales by a constant, so lists of numbers and arrows obey exactly the same arithmetic.",
+  "depends_on": [],
+  "sources": [
+   "Linear Models of Returns (https://claude.ai/code/artifact/95edfc2a-c498-44a6-b8ab-08b05a4ec5a8)"
+  ],
+  "check": "Q: Add u = (3, 1) and v = (1, 2). A: (4, 3), which is also the arrow from the origin to the head of v laid at the head of u."
+ },
+ {
+  "title": "Inner product",
+  "domain": "Mathematics",
+  "one_line": "The inner product multiplies matching entries of two vectors and sums them, and it equals the product of the two lengths times the cosine of the angle between them.",
+  "depends_on": [
+   "Vector"
+  ],
+  "sources": [
+   "Linear Models of Returns (https://claude.ai/code/artifact/95edfc2a-c498-44a6-b8ab-08b05a4ec5a8)"
+  ],
+  "check": "Q: What is the inner product of two vectors at right angles? A: Exactly zero, because cos 90 degrees is zero."
+ },
+ {
+  "title": "Norm of a vector",
+  "domain": "Mathematics",
+  "one_line": "The Euclidean length of a vector is the square root of its inner product with itself, so a vector with n equal entries of size mu has length mu times the square root of n.",
+  "depends_on": [
+   "Inner product"
+  ],
+  "sources": [
+   "Linear Models of Returns (https://claude.ai/code/artifact/95edfc2a-c498-44a6-b8ab-08b05a4ec5a8)",
+   "The Alpha Split (https://claude.ai/code/artifact/703f2e90-07d6-414f-81fa-5d02d0e38fed)"
+  ],
+  "check": "Q: A vector has 400 entries each equal to 0.005 in absolute value. What is its 2-norm? A: 0.005 times sqrt(400) = 0.1."
+ },
+ {
+  "title": "Orthogonality",
+  "domain": "Mathematics",
+  "one_line": "Two vectors are orthogonal when their inner product is exactly zero, which is the algebraic statement that they sit at a right angle and neither carries any component of the other.",
+  "depends_on": [
+   "Inner product"
+  ],
+  "sources": [
+   "Linear Models of Returns (https://claude.ai/code/artifact/95edfc2a-c498-44a6-b8ab-08b05a4ec5a8)"
+  ],
+  "check": "Q: If B transpose times x equals the zero vector, what does that say about x? A: x is orthogonal to every column of B at once."
+ },
+ {
+  "title": "Span",
+  "domain": "Mathematics",
+  "one_line": "The span of a set of vectors is every vector you can build from them by scaling and adding, which is a flat sheet through the origin whose dimension counts the independent directions.",
+  "depends_on": [
+   "Vector"
+  ],
+  "sources": [
+   "Linear Models of Returns (https://claude.ai/code/artifact/95edfc2a-c498-44a6-b8ab-08b05a4ec5a8)"
+  ],
+  "check": "Q: Two vectors in the plane are scalar multiples of each other. What is the dimension of their span? A: One, a line, not two."
+ },
+ {
+  "title": "Subspace",
+  "domain": "Mathematics",
+  "one_line": "A subspace is a set closed under addition and scaling, so it is a flat sheet through the origin, and every span is a subspace of some dimension inside a bigger space.",
+  "depends_on": [
+   "Span"
+  ],
+  "sources": [
+   "Linear Models of Returns (https://claude.ai/code/artifact/95edfc2a-c498-44a6-b8ab-08b05a4ec5a8)"
+  ],
+  "check": "Q: Must a subspace contain the origin? A: Yes, because scaling any of its vectors by zero has to stay inside it."
+ },
+ {
+  "title": "Matrix as a linear map",
+  "domain": "Mathematics",
+  "one_line": "An n by m matrix is a machine that eats a vector of length m and returns a vector of length n, so columns match the input and rows match the output.",
+  "depends_on": [
+   "Vector"
+  ],
+  "sources": [
+   "Linear Models of Returns (https://claude.ai/code/artifact/95edfc2a-c498-44a6-b8ab-08b05a4ec5a8)"
+  ],
+  "check": "Q: A loadings matrix B is 3000 by 60. What length vector does it consume and what length does it emit? A: It consumes 60 factor returns and emits 3000 asset returns."
+ },
+ {
+  "title": "Column space",
+  "domain": "Mathematics",
+  "one_line": "The column space of a matrix is the span of its columns, and since any product Bf is a weighted sum of those columns, Bf can never leave the column space whatever f is.",
+  "depends_on": [
+   "Matrix as a linear map",
+   "Span"
+  ],
+  "sources": [
+   "Linear Models of Returns (https://claude.ai/code/artifact/95edfc2a-c498-44a6-b8ab-08b05a4ec5a8)"
+  ],
+  "check": "Q: With 3000 assets and 60 factors, how many of the 3000 directions can the systematic return reach? A: Sixty, so the systematic part is trapped on a 60 dimensional sheet."
+ },
+ {
+  "title": "Rank of a matrix",
+  "domain": "Mathematics",
+  "one_line": "The rank of a matrix is the dimension of its column space, meaning the number of genuinely independent columns, and a sample covariance from T observations has rank at most T.",
+  "depends_on": [
+   "Column space"
+  ],
+  "sources": [
+   "Linear Models of Returns (https://claude.ai/code/artifact/95edfc2a-c498-44a6-b8ab-08b05a4ec5a8)",
+   "Evaluating Risk (https://claude.ai/code/artifact/b5aa3c86-7448-44e1-83ee-911457ecc245)",
+   "Grading Our Covariance (https://claude.ai/code/artifact/3fd35969-f7f0-46d6-91ab-ceb3831ed63c)"
+  ],
+  "check": "Q: A 252 day sample covariance matrix on 440 names has what rank at most? A: 251, so it is singular and cannot be inverted."
+ },
+ {
+  "title": "Orthogonal complement",
+  "domain": "Mathematics",
+  "one_line": "The orthogonal complement of a subspace is every vector at right angles to all of it, and in n dimensions a rank m subspace leaves n minus m complementary directions.",
+  "depends_on": [
+   "Orthogonality",
+   "Subspace"
+  ],
+  "sources": [
+   "Linear Models of Returns (https://claude.ai/code/artifact/95edfc2a-c498-44a6-b8ab-08b05a4ec5a8)"
+  ],
+  "check": "Q: With 3000 assets and 60 factors, how many directions lie in the orthogonal complement of the factor sheet? A: 2940, which is 98 percent of the space."
+ },
+ {
+  "title": "Orthonormal basis",
+  "domain": "Mathematics",
+  "one_line": "A set of vectors is orthonormal when every pair is orthogonal and every vector has unit length, so each contribution can be read off with no cross terms and the Gram matrix is the identity.",
+  "depends_on": [
+   "Orthogonality",
+   "Norm of a vector"
+  ],
+  "sources": [
+   "Linear Models of Returns (https://claude.ai/code/artifact/95edfc2a-c498-44a6-b8ab-08b05a4ec5a8)",
+   "Statistical Factor Models (https://claude.ai/code/artifact/3b8a1936-8d6c-419e-9060-0420a9bdd8ae)"
+  ],
+  "check": "Q: If U has orthonormal columns, what is U transpose times U? A: The identity matrix, which is why inverses vanish from projection formulas built on U."
+ },
+ {
+  "title": "Gram matrix",
+  "domain": "Mathematics",
+  "one_line": "The Gram matrix X transpose X records how much each column of X overlaps every other column, and inverting it is exactly what undoes the double counting in a regression.",
+  "depends_on": [
+   "Inner product",
+   "Matrix as a linear map"
+  ],
+  "sources": [
+   "Linear Models of Returns (https://claude.ai/code/artifact/95edfc2a-c498-44a6-b8ab-08b05a4ec5a8)"
+  ],
+  "check": "Q: What does a large off diagonal entry of the Gram matrix mean? A: Two predictors overlap heavily, so they are not independent sources of information."
+ },
+ {
+  "title": "Projection onto a subspace",
+  "domain": "Mathematics",
+  "one_line": "The projection of a vector onto a subspace is the closest point of that subspace, equivalently the unique point whose leftover is perpendicular to the whole subspace.",
+  "depends_on": [
+   "Orthogonality",
+   "Subspace",
+   "Norm of a vector"
+  ],
+  "sources": [
+   "EQI ch.4 App",
+   "Linear Models of Returns (https://claude.ai/code/artifact/95edfc2a-c498-44a6-b8ab-08b05a4ec5a8)"
+  ],
+  "check": "Q: Two conditions define the same projection point. Name them. A: Closest point of the sheet, and residual perpendicular to every direction in the sheet."
+ },
+ {
+  "title": "Normal equations",
+  "domain": "Mathematics",
+  "one_line": "Requiring the residual to be perpendicular to every column of X gives X transpose times (y minus X beta) equals zero, whose solution is beta hat equals (X transpose X) inverse X transpose y.",
+  "depends_on": [
+   "Projection onto a subspace",
+   "Gram matrix"
+  ],
+  "sources": [
+   "EQI ch.4 §4.7.1, eq (4.10)",
+   "Linear Models of Returns (https://claude.ai/code/artifact/95edfc2a-c498-44a6-b8ab-08b05a4ec5a8)"
+  ],
+  "check": "Q: What single geometric demand produces the normal equations? A: The residual must be orthogonal to every column of X, not merely to the fitted vector."
+ },
+ {
+  "title": "Hat matrix",
+  "domain": "Mathematics",
+  "one_line": "The hat matrix H equals X times (X transpose X) inverse times X transpose, the operator that casts the shadow of y onto the column space of X and so puts the hat on y.",
+  "depends_on": [
+   "Normal equations"
+  ],
+  "sources": [
+   "EQI ch.4 §4.7.1, eq (4.11)",
+   "Linear Models of Returns (https://claude.ai/code/artifact/95edfc2a-c498-44a6-b8ab-08b05a4ec5a8)"
+  ],
+  "check": "Q: What does I minus H do to a vector? A: It returns the residual, which is why it is called the residual maker."
+ },
+ {
+  "title": "Idempotence",
+  "domain": "Mathematics",
+  "one_line": "An operator is idempotent when applying it twice changes nothing beyond applying it once, which is exactly the picture that the shadow of a shadow is the same shadow.",
+  "depends_on": [
+   "Hat matrix"
+  ],
+  "sources": [
+   "EQI ch.4 §4.4.2",
+   "Linear Models of Returns (https://claude.ai/code/artifact/95edfc2a-c498-44a6-b8ab-08b05a4ec5a8)"
+  ],
+  "check": "Q: State idempotence for the hat matrix in symbols. A: H squared equals H."
+ },
+ {
+  "title": "Trace of a projection",
+  "domain": "Mathematics",
+  "one_line": "The trace of an orthogonal projection matrix equals the dimension of the subspace it projects onto, so it counts how many directions the fit has spent.",
+  "depends_on": [
+   "Hat matrix",
+   "Rank of a matrix"
+  ],
+  "sources": [
+   "Linear Models of Returns (https://claude.ai/code/artifact/95edfc2a-c498-44a6-b8ab-08b05a4ec5a8)"
+  ],
+  "check": "Q: A nine point fit on two columns has what trace for H and for I minus H? A: 2 and 7, which is where degrees of freedom come from."
+ },
+ {
+  "title": "Pythagorean decomposition",
+  "domain": "Mathematics",
+  "one_line": "Because the projection and the residual meet at a right angle, their squared lengths add to the squared length of the original vector, so variances add while volatilities do not.",
+  "depends_on": [
+   "Projection onto a subspace",
+   "Orthogonal complement"
+  ],
+  "sources": [
+   "Linear Models of Returns (https://claude.ai/code/artifact/95edfc2a-c498-44a6-b8ab-08b05a4ec5a8)"
+  ],
+  "check": "Q: Factor volatility is 141,146 dollars and idiosyncratic volatility 181,580. What is total volatility? A: About 229,986 dollars, not their sum of 322,726."
+ },
+ {
+  "title": "Eigenvalue equation",
+  "domain": "Mathematics",
+  "one_line": "A vector v is an eigenvector of a matrix when the matrix only stretches it, so that Sigma times v equals lambda times v with lambda the eigenvalue for that direction.",
+  "depends_on": [
+   "Matrix as a linear map"
+  ],
+  "sources": [
+   "EQI ch.7 §7.1.1",
+   "Statistical Factor Models (https://claude.ai/code/artifact/3b8a1936-8d6c-419e-9060-0420a9bdd8ae)"
+  ],
+  "check": "Q: Write the eigenvalue equation for a covariance matrix. A: Sigma v equals lambda v, with v a nonzero vector."
+ },
+ {
+  "title": "Eigendecomposition of a symmetric matrix",
+  "domain": "Mathematics",
+  "one_line": "A symmetric positive semidefinite matrix has real nonnegative eigenvalues and an orthonormal set of eigenvectors, so it can be written as U times a diagonal matrix times U transpose.",
+  "depends_on": [
+   "Eigenvalue equation",
+   "Orthonormal basis"
+  ],
+  "sources": [
+   "Linear Models of Returns (https://claude.ai/code/artifact/95edfc2a-c498-44a6-b8ab-08b05a4ec5a8)",
+   "Statistical Factor Models (https://claude.ai/code/artifact/3b8a1936-8d6c-419e-9060-0420a9bdd8ae)"
+  ],
+  "check": "Q: Write a symmetric positive semidefinite Sigma in eigen form. A: Sigma = U S U transpose with U orthonormal and S diagonal and nonnegative."
+ },
+ {
+  "title": "Rayleigh quotient",
+  "domain": "Mathematics",
+  "one_line": "The ratio of x transpose A x to x transpose x can never exceed the largest eigenvalue of the symmetric matrix A, and it attains that maximum at the top eigenvector.",
+  "depends_on": [
+   "Eigenvalue equation",
+   "Norm of a vector"
+  ],
+  "sources": [
+   "EQI ch.4 §4.3",
+   "The Alpha Split (https://claude.ai/code/artifact/703f2e90-07d6-414f-81fa-5d02d0e38fed)",
+   "Statistical Factor Models (https://claude.ai/code/artifact/3b8a1936-8d6c-419e-9060-0420a9bdd8ae)"
+  ],
+  "check": "Q: Measured Rayleigh quotient is 0.086669 and the operator norm is 0.158270. Is that consistent? A: Yes, the quotient must be at or below the largest eigenvalue."
+ },
+ {
+  "title": "Operator norm",
+  "domain": "Mathematics",
+  "one_line": "The operator norm of a matrix is the largest factor by which it can stretch any vector, and for a diagonal matrix that is simply the largest diagonal entry.",
+  "depends_on": [
+   "Eigenvalue equation",
+   "Norm of a vector"
+  ],
+  "sources": [
+   "EQI ch.4 §4.3",
+   "Linear Models of Returns (https://claude.ai/code/artifact/95edfc2a-c498-44a6-b8ab-08b05a4ec5a8)",
+   "The Alpha Split (https://claude.ai/code/artifact/703f2e90-07d6-414f-81fa-5d02d0e38fed)"
+  ],
+  "check": "Q: What is the operator norm of a diagonal idiosyncratic covariance matrix? A: The variance of the single noisiest stock, footnoted near 40 percent annualised for US equities."
+ },
+ {
+  "title": "Condition number",
+  "domain": "Mathematics",
+  "one_line": "The condition number is the ratio of largest to smallest eigenvalue, and it bounds how much a relative error in a matrix can be amplified in its inverse.",
+  "depends_on": [
+   "Eigendecomposition of a symmetric matrix"
+  ],
+  "sources": [
+   "Evaluating Risk (https://claude.ai/code/artifact/b5aa3c86-7448-44e1-83ee-911457ecc245)"
+  ],
+  "check": "Q: A matrix has largest eigenvalue 97.32 and smallest 0.00544. What is its condition number? A: About 17,899, so a one percent input error can become a 17,899 percent output error."
+ },
+ {
+  "title": "Singular value decomposition",
+  "domain": "Mathematics",
+  "one_line": "Every matrix factors as U times S times V transpose, which reads as a rotation, then a stretch of each axis by its own singular value, then another rotation.",
+  "depends_on": [
+   "Eigendecomposition of a symmetric matrix",
+   "Orthonormal basis"
+  ],
+  "sources": [
+   "EQI ch.4 §4.7.4, eq (4.27)",
+   "Linear Models of Returns (https://claude.ai/code/artifact/95edfc2a-c498-44a6-b8ab-08b05a4ec5a8)",
+   "Statistical Factor Models (https://claude.ai/code/artifact/3b8a1936-8d6c-419e-9060-0420a9bdd8ae)"
+  ],
+  "check": "Q: Which of the three SVD factors is the only one that changes shape? A: The diagonal stretch S; the two rotations only change orientation."
+ },
+ {
+  "title": "Frobenius norm",
+  "domain": "Mathematics",
+  "one_line": "The Frobenius norm squares every entry of a matrix, sums them and takes the root, so it is the ordinary Euclidean length of the matrix flattened into one long vector.",
+  "depends_on": [
+   "Norm of a vector",
+   "Matrix as a linear map"
+  ],
+  "sources": [
+   "EQI ch.5 §5.3.1",
+   "Evaluating Risk (https://claude.ai/code/artifact/b5aa3c86-7448-44e1-83ee-911457ecc245)",
+   "Statistical Factor Models (https://claude.ai/code/artifact/3b8a1936-8d6c-419e-9060-0420a9bdd8ae)"
+  ],
+  "check": "Q: A difference matrix flattens to (0.04, 0.08, 0.00, -0.09). What is its Frobenius norm? A: 0.1269, the ordinary length of that list."
+ },
+ {
+  "title": "Eckart-Young theorem",
+  "domain": "Mathematics",
+  "one_line": "Truncating the SVD at the largest m singular values gives the best possible rank m approximation in any unitarily invariant norm, and the leftover error equals the discarded singular values.",
+  "depends_on": [
+   "Singular value decomposition",
+   "Frobenius norm",
+   "Rank of a matrix"
+  ],
+  "sources": [
+   "EQI ch.7 §7.1.1, eq (7.2) to (7.4)",
+   "Statistical Factor Models (https://claude.ai/code/artifact/3b8a1936-8d6c-419e-9060-0420a9bdd8ae)"
+  ],
+  "check": "Q: What is the squared Frobenius error of the best rank m approximation? A: The sum of the squared singular values you discarded, an identity rather than a bound."
+ },
+ {
+  "title": "Matrix square root",
+  "domain": "Mathematics",
+  "one_line": "Square rooting the eigenvalues of a symmetric positive semidefinite matrix gives a matrix that squares back to it, which is the object that whitens or colours a random vector.",
+  "depends_on": [
+   "Eigendecomposition of a symmetric matrix"
+  ],
+  "sources": [
+   "EQI ch.4 Exercise 4.3",
+   "Linear Models of Returns (https://claude.ai/code/artifact/95edfc2a-c498-44a6-b8ab-08b05a4ec5a8)",
+   "Evaluating Risk (https://claude.ai/code/artifact/b5aa3c86-7448-44e1-83ee-911457ecc245)"
+  ],
+  "check": "Q: If xi is standard Gaussian, what is the covariance of Omega to the half times xi? A: Exactly Omega, because covariance eats the transform twice."
+ },
+ {
+  "title": "Matrix determinant lemma",
+  "domain": "Mathematics",
+  "one_line": "For any two vectors the determinant of the identity plus a rank one update a nu transpose equals one plus nu transpose a, so the update is singular exactly when that inner product is minus one.",
+  "depends_on": [
+   "Matrix as a linear map",
+   "Inner product"
+  ],
+  "sources": [
+   "EQI ch.4 Exercise 4.5",
+   "Linear Models of Returns (https://claude.ai/code/artifact/95edfc2a-c498-44a6-b8ab-08b05a4ec5a8)",
+   "The Alpha Split (https://claude.ai/code/artifact/703f2e90-07d6-414f-81fa-5d02d0e38fed)"
+  ],
+  "check": "Q: When is I + a nu transpose singular? A: Exactly when nu transpose a equals minus one."
+ },
+ {
+  "title": "One norm versus two norm inequality",
+  "domain": "Mathematics",
+  "one_line": "The 1-norm of an n vector never exceeds the square root of n times its 2-norm, with equality exactly when every coordinate has the same size.",
+  "depends_on": [
+   "Norm of a vector"
+  ],
+  "sources": [
+   "EQI ch.4 §4.3",
+   "The Alpha Split (https://claude.ai/code/artifact/703f2e90-07d6-414f-81fa-5d02d0e38fed)",
+   "Linear Models of Returns (https://claude.ai/code/artifact/95edfc2a-c498-44a6-b8ab-08b05a4ec5a8)"
+  ],
+  "check": "Q: Every entry of an n vector has size mu. Compare its 1-norm and 2-norm. A: The 1-norm is n mu and the 2-norm is sqrt(n) mu, so the ratio is exactly sqrt(n)."
+ },
+ {
+  "title": "Convexity and concavity",
+  "domain": "Mathematics",
+  "one_line": "A function is concave if it bends downward so that it lies above every chord, and convex if it bends upward so that it lies below every chord.",
+  "depends_on": [],
+  "sources": [
+   "The Second Moment (https://claude.ai/code/artifact/f752817b-76e9-4098-af91-44dde50e19de)",
+   "The Anatomy of a Return (https://claude.ai/code/artifact/7167b6ba-321d-41f4-803d-a132a611922d)"
+  ],
+  "check": "Q: Is 1 over x convex or concave on the positive numbers? A: Convex, which is why averaging reciprocals lands above the reciprocal of the average."
+ },
+ {
+  "title": "Jensen's inequality",
+  "domain": "Mathematics",
+  "one_line": "For a concave function the expectation of the function is at most the function of the expectation, with equality only where the function is affine on the support of the variable.",
+  "depends_on": [
+   "Convexity and concavity"
+  ],
+  "sources": [
+   "EQI ch.2 Exercise 2.1",
+   "The Anatomy of a Return (https://claude.ai/code/artifact/7167b6ba-321d-41f4-803d-a132a611922d)",
+   "The Second Moment (https://claude.ai/code/artifact/f752817b-76e9-4098-af91-44dde50e19de)",
+   "Evaluating Risk (https://claude.ai/code/artifact/b5aa3c86-7448-44e1-83ee-911457ecc245)"
+  ],
+  "check": "Q: A fair coin pays minus 40 percent or plus 80 percent. Compare log(1+E[r]) with E[log(1+r)]. A: 0.182 against 0.038, a Jensen gap of 0.144."
+ },
+ {
+  "title": "Taylor expansion",
+  "domain": "Mathematics",
+  "one_line": "A smooth function can be written near a point as a constant plus a slope term plus a curvature term plus corrections that shrink near the point and grow away from it.",
+  "depends_on": [],
+  "sources": [
+   "The Second Moment (https://claude.ai/code/artifact/f752817b-76e9-4098-af91-44dde50e19de)",
+   "The Anatomy of a Return (https://claude.ai/code/artifact/7167b6ba-321d-41f4-803d-a132a611922d)"
+  ],
+  "check": "Q: Expanding minus exp(-gx) around zero, what is the first term the quadratic approximation discards? A: The cubic term (gx) cubed over 6."
+ },
+ {
+  "title": "Logarithm as a group isomorphism",
+  "domain": "Mathematics",
+  "one_line": "The logarithm maps the multiplicative group of positive reals onto the additive real line, turning products into sums exactly and invertibly, which is its defining equation rather than a convenience.",
+  "depends_on": [],
+  "sources": [
+   "EQI ch.2 §2.1.3",
+   "The Coordinates of a Return (https://claude.ai/code/artifact/ef6ce45a-28c7-4b01-b1ab-b3431532bf22)",
+   "The Anatomy of a Return (https://claude.ai/code/artifact/7167b6ba-321d-41f4-803d-a132a611922d)"
+  ],
+  "check": "Q: Why is exp of the sum of log returns exactly the compound return? A: Because log is invertible and turns the product into a sum, so the round trip is an identity, not an approximation."
+ },
+ {
+  "title": "Basis change",
+  "domain": "Mathematics",
+  "one_line": "Replacing X by X times an invertible matrix Q leaves every fitted value unchanged while changing every coefficient, so a coefficient is never a basis free statement.",
+  "depends_on": [
+   "Matrix as a linear map",
+   "Span"
+  ],
+  "sources": [
+   "EQI ch.4 eq (4.12)",
+   "Linear Models of Returns (https://claude.ai/code/artifact/95edfc2a-c498-44a6-b8ab-08b05a4ec5a8)"
+  ],
+  "check": "Q: Under a change of basis the fit stayed identical to 2.1e-14 but the estimate moved from (0.343, 0.507) to what kind of thing? A: A different coefficient pair, (0.095, 0.153), describing the same predictions."
+ },
+ {
+  "title": "Lagrangian",
+  "domain": "Mathematics",
+  "one_line": "The Lagrangian adds to the objective a multiplier times the slack in each constraint, so that setting its gradient to zero characterises the constrained stationary points.",
+  "depends_on": [
+   "Convexity and concavity"
+  ],
+  "sources": [
+   "EQI ch.7 §7.1.1",
+   "Statistical Factor Models (https://claude.ai/code/artifact/3b8a1936-8d6c-419e-9060-0420a9bdd8ae)",
+   "Evaluating Risk (https://claude.ai/code/artifact/b5aa3c86-7448-44e1-83ee-911457ecc245)"
+  ],
+  "check": "Q: Differentiate w'Sigma w + lambda(1 - w'w) and set it to zero. A: 2 Sigma w minus 2 lambda w equals zero, which is the eigenvalue equation."
+ },
+ {
+  "title": "Random variable",
+  "domain": "Stochastics",
+  "one_line": "A random variable is a labelled slot that has not been filled yet, together with how likely each possible value is, and you get exactly one draw from it per occasion.",
+  "depends_on": [],
+  "sources": [
+   "The Anatomy of a Return (https://claude.ai/code/artifact/7167b6ba-321d-41f4-803d-a132a611922d)",
+   "Which Bell Is Which (https://claude.ai/code/artifact/dff7b48e-6611-4b55-aa29-0d3a4e85b124)"
+  ],
+  "check": "Q: Is Monday's crow count a random variable before or after you look? A: Before; after you look it is a fact, and the randomness lived in the unfilled slot."
+ },
+ {
+  "title": "Probability as a repeated experiment",
+  "domain": "Stochastics",
+  "one_line": "A probability is the fraction of imaginary re-runs of the same occasion that produce the outcome, so it is a property of the occasion considered as repeatable and never of the single day you lived.",
+  "depends_on": [
+   "Random variable"
+  ],
+  "sources": [
+   "The Anatomy of a Return (https://claude.ai/code/artifact/7167b6ba-321d-41f4-803d-a132a611922d)"
+  ],
+  "check": "Q: Can you observe p by watching harder on Monday? A: No, p lives down the column of imaginary re-runs and you only ever see one entry of it."
+ },
+ {
+  "title": "Bernoulli distribution",
+  "domain": "Stochastics",
+  "one_line": "A Bernoulli variable takes value one with probability p and zero otherwise, so its whole distribution is two bars, with mean p and variance p times one minus p.",
+  "depends_on": [
+   "Random variable",
+   "Probability as a repeated experiment"
+  ],
+  "sources": [
+   "The Anatomy of a Return (https://claude.ai/code/artifact/7167b6ba-321d-41f4-803d-a132a611922d)",
+   "Which Bell Is Which (https://claude.ai/code/artifact/dff7b48e-6611-4b55-aa29-0d3a4e85b124)"
+  ],
+  "check": "Q: At which p is a Bernoulli variance largest, and what is it? A: At p equals one half, where the variance is 0.25."
+ },
+ {
+  "title": "Independence",
+  "domain": "Stochastics",
+  "one_line": "Two variables are independent when knowing one changes nothing about the other, which is used for exactly one thing: turning a joint probability into a product.",
+  "depends_on": [
+   "Random variable"
+  ],
+  "sources": [
+   "The Anatomy of a Return (https://claude.ai/code/artifact/7167b6ba-321d-41f4-803d-a132a611922d)"
+  ],
+  "check": "Q: What single algebraic step does an independence assumption buy? A: It lets the probability of a whole sequence be written as the product of the per day probabilities."
+ },
+ {
+  "title": "Identically distributed",
+  "domain": "Stochastics",
+  "one_line": "Identically distributed means every occasion is drawn from the same law, which is a relabelling permission that converts many variables with one draw each into one variable with many draws.",
+  "depends_on": [
+   "Random variable"
+  ],
+  "sources": [
+   "The Anatomy of a Return (https://claude.ai/code/artifact/7167b6ba-321d-41f4-803d-a132a611922d)",
+   "Which Bell Is Which (https://claude.ai/code/artifact/dff7b48e-6611-4b55-aa29-0d3a4e85b124)"
+  ],
+  "check": "Q: Without the identical distribution claim, how many observations do you have per unknown? A: Exactly one, forever, and no amount of extra data collection helps."
+ },
+ {
+  "title": "Independent and identically distributed",
+  "domain": "Stochastics",
+  "one_line": "The iid assumption is the pair of separate claims that occasions do not influence each other and that they share one law, and only the second is what licenses pooling.",
+  "depends_on": [
+   "Independence",
+   "Identically distributed"
+  ],
+  "sources": [
+   "The Anatomy of a Return (https://claude.ai/code/artifact/7167b6ba-321d-41f4-803d-a132a611922d)",
+   "Which Bell Is Which (https://claude.ai/code/artifact/dff7b48e-6611-4b55-aa29-0d3a4e85b124)"
+  ],
+  "check": "Q: A territorial crow makes tomorrow depend on today but the long run rate settles at 0.40 every day. Which claim broke? A: Independence broke; identical distribution still holds."
+ },
+ {
+  "title": "Binomial distribution",
+  "domain": "Stochastics",
+  "one_line": "Adding n independent Bernoulli trials gives a count with probability C(n,k) times p to the k times one minus p to the n minus k, with mean np and variance np(1-p).",
+  "depends_on": [
+   "Bernoulli distribution",
+   "Independent and identically distributed"
+  ],
+  "sources": [
+   "The Anatomy of a Return (https://claude.ai/code/artifact/7167b6ba-321d-41f4-803d-a132a611922d)",
+   "Where All This Came From (https://claude.ai/code/artifact/5753ff9b-dc66-43ac-a7be-b4cba10dcd4e)",
+   "Which Bell Is Which (https://claude.ai/code/artifact/dff7b48e-6611-4b55-aa29-0d3a4e85b124)"
+  ],
+  "check": "Q: With n = 20 and p = 0.35, where does the binomial peak and why? A: At k = np = 7, where the rise in the number of arrangements stops outrunning the fall in per arrangement probability."
+ },
+ {
+  "title": "Binomial coefficient",
+  "domain": "Stochastics",
+  "one_line": "The binomial coefficient counts how many orderings produce the same total, and it appears only because a count is a bundle of outcomes you decided not to tell apart.",
+  "depends_on": [
+   "Binomial distribution"
+  ],
+  "sources": [
+   "Where All This Came From (https://claude.ai/code/artifact/5753ff9b-dc66-43ac-a7be-b4cba10dcd4e)",
+   "The Anatomy of a Return (https://claude.ai/code/artifact/7167b6ba-321d-41f4-803d-a132a611922d)"
+  ],
+  "check": "Q: Does dropping C(n,k) move the maximum likelihood estimate of p? A: No, it contains no p, so the argmax is 0.35 with or without it, but the quoted probability is wrong by a factor of 77,520."
+ },
+ {
+  "title": "Expectation",
+  "domain": "Stochastics",
+  "one_line": "The expectation of a variable is the long run average of its values weighted by their probabilities, and it passes through sums and constant multiples always, with no conditions attached.",
+  "depends_on": [
+   "Random variable"
+  ],
+  "sources": [
+   "The Anatomy of a Return (https://claude.ai/code/artifact/7167b6ba-321d-41f4-803d-a132a611922d)"
+  ],
+  "check": "Q: Does E[aX + bY] = aE[X] + bE[Y] require independence? A: No, linearity of expectation holds always."
+ },
+ {
+  "title": "Variance",
+  "domain": "Stochastics",
+  "one_line": "Variance is the expected squared deviation from the mean, squared so deviations cannot cancel and so that independent contributions add, at the cost of living in squared units.",
+  "depends_on": [
+   "Expectation"
+  ],
+  "sources": [
+   "The Anatomy of a Return (https://claude.ai/code/artifact/7167b6ba-321d-41f4-803d-a132a611922d)"
+  ],
+  "check": "Q: Why take a square root at the end? A: To return to the units of the variable, giving the standard deviation, which is what everyone calls volatility."
+ },
+ {
+  "title": "Covariance",
+  "domain": "Stochastics",
+  "one_line": "Covariance is the expected product of the two centred deviations, and it is the term that appears when the variance of a sum is expanded.",
+  "depends_on": [
+   "Expectation",
+   "Variance"
+  ],
+  "sources": [
+   "The Anatomy of a Return (https://claude.ai/code/artifact/7167b6ba-321d-41f4-803d-a132a611922d)",
+   "Linear Models of Returns (https://claude.ai/code/artifact/95edfc2a-c498-44a6-b8ab-08b05a4ec5a8)"
+  ],
+  "check": "Q: What is the covariance of a linear map of a random vector? A: cov(B xi) = B Omega B transpose, the matrix acting once from each side."
+ },
+ {
+  "title": "Correlation",
+  "domain": "Stochastics",
+  "one_line": "Correlation is covariance divided by the two standard deviations, so it lies between minus one and one and measures straight line agreement and nothing else.",
+  "depends_on": [
+   "Covariance"
+  ],
+  "sources": [
+   "The Anatomy of a Return (https://claude.ai/code/artifact/7167b6ba-321d-41f4-803d-a132a611922d)"
+  ],
+  "check": "Q: What kind of relationship is correlation blind to? A: Every nonlinear one, including a deterministic relation such as Y equals X squared with X symmetric."
+ },
+ {
+  "title": "Variance of a sum",
+  "domain": "Stochastics",
+  "one_line": "The variance of a sum equals the sum of the variances plus twice the sum of the covariances, so variances add only when the cross terms vanish.",
+  "depends_on": [
+   "Variance",
+   "Covariance"
+  ],
+  "sources": [
+   "The Anatomy of a Return (https://claude.ai/code/artifact/7167b6ba-321d-41f4-803d-a132a611922d)",
+   "The Coordinates of a Return (https://claude.ai/code/artifact/ef6ce45a-28c7-4b01-b1ab-b3431532bf22)"
+  ],
+  "check": "Q: T uncorrelated daily returns each with volatility sigma. What is the standard deviation of the sum? A: sigma times the square root of T, because it is variances that add, not standard deviations."
+ },
+ {
+  "title": "Uncorrelated is not independent",
+  "domain": "Stochastics",
+  "one_line": "Zero correlation only rules out straight line dependence, so a process built as r_t = h_t epsilon_t is exactly uncorrelated while being enormously dependent through the size of past moves.",
+  "depends_on": [
+   "Correlation",
+   "Independence"
+  ],
+  "sources": [
+   "EQI ch.2 §2.1.5",
+   "The Coordinates of a Return (https://claude.ai/code/artifact/ef6ce45a-28c7-4b01-b1ab-b3431532bf22)",
+   "The Anatomy of a Return (https://claude.ai/code/artifact/7167b6ba-321d-41f4-803d-a132a611922d)"
+  ],
+  "check": "Q: A GARCH series had correlation 0.002 between consecutive returns and 0.207 between consecutive absolute returns. What does that show? A: Uncorrelated in sign yet strongly dependent in size."
+ },
+ {
+  "title": "Standard error of a sample mean",
+  "domain": "Stochastics",
+  "one_line": "The variance of an average of n independent draws is the single draw variance divided by n, so the standard error falls like one over the square root of n.",
+  "depends_on": [
+   "Variance of a sum",
+   "Independent and identically distributed"
+  ],
+  "sources": [
+   "The Anatomy of a Return (https://claude.ai/code/artifact/7167b6ba-321d-41f4-803d-a132a611922d)"
+  ],
+  "check": "Q: A hundred times the data buys how much precision? A: Ten times, because the error falls like one over the square root of n, a slope of minus one half on log axes."
+ },
+ {
+  "title": "Law of large numbers",
+  "domain": "Stochastics",
+  "one_line": "The average of many independent draws converges to the true mean provided that mean exists, which is why estimation works at all and why it silently fails when it does not.",
+  "depends_on": [
+   "Expectation",
+   "Independent and identically distributed"
+  ],
+  "sources": [
+   "The Anatomy of a Return (https://claude.ai/code/artifact/7167b6ba-321d-41f4-803d-a132a611922d)"
+  ],
+  "check": "Q: Five runs of 200,000 draws from a Student t with one degree of freedom finished at minus 5.45, minus 0.93, plus 1.20, plus 0.15 and minus 0.37. Why? A: The mean does not exist, so there is nothing to converge to."
+ },
+ {
+  "title": "Central limit theorem",
+  "domain": "Stochastics",
+  "one_line": "The standardised sum of many independent draws with finite variance approaches a Gaussian, so the bell is a residue of adding rather than an assumption anyone made.",
+  "depends_on": [
+   "Variance of a sum",
+   "Independent and identically distributed"
+  ],
+  "sources": [
+   "Which Bell Is Which (https://claude.ai/code/artifact/dff7b48e-6611-4b55-aa29-0d3a4e85b124)",
+   "The Anatomy of a Return (https://claude.ai/code/artifact/7167b6ba-321d-41f4-803d-a132a611922d)",
+   "Where All This Came From (https://claude.ai/code/artifact/5753ff9b-dc66-43ac-a7be-b4cba10dcd4e)"
+  ],
+  "check": "Q: Sums of exponential draws had measured skewness 1.98, 1.41, 0.89, 0.37 at n = 1, 2, 5, 30. What exact law is that? A: Skewness equals 2 over the square root of n."
+ },
+ {
+  "title": "Gaussian distribution",
+  "domain": "Stochastics",
+  "one_line": "The Gaussian is the limiting law of standardised sums, the maximum entropy law given a known mean and variance, and the unique error law making the arithmetic mean the most probable value.",
+  "depends_on": [
+   "Central limit theorem"
+  ],
+  "sources": [
+   "The Anatomy of a Return (https://claude.ai/code/artifact/7167b6ba-321d-41f4-803d-a132a611922d)",
+   "Where All This Came From (https://claude.ai/code/artifact/5753ff9b-dc66-43ac-a7be-b4cba10dcd4e)"
+  ],
+  "check": "Q: Why is the Gaussian kurtosis exactly 3? A: It is the value of the integral of z to the fourth against the density, which returns 3 rather than being a convention."
+ },
+ {
+  "title": "Moments",
+  "domain": "Stochastics",
+  "one_line": "The k-th moment is the average of x to the k, chosen historically because it is trivially computable from data, and it summarises but does not always identify a distribution.",
+  "depends_on": [
+   "Expectation"
+  ],
+  "sources": [
+   "Where All This Came From (https://claude.ai/code/artifact/5753ff9b-dc66-43ac-a7be-b4cba10dcd4e)",
+   "The Anatomy of a Return (https://claude.ai/code/artifact/7167b6ba-321d-41f4-803d-a132a611922d)"
+  ],
+  "check": "Q: Do the moments determine the distribution? A: Only when the moment generating function is finite near zero; the lognormal fails that and shares every moment with a rippled twin."
+ },
+ {
+  "title": "Centered versus uncentered second moment",
+  "domain": "Stochastics",
+  "one_line": "The uncentered second moment equals the variance plus the squared mean, so when the mean is tiny relative to the spread the two coincide and no mean has to be subtracted.",
+  "depends_on": [
+   "Moments",
+   "Variance"
+  ],
+  "sources": [
+   "EQI ch.2 §2.1.1",
+   "The Coordinates of a Return (https://claude.ai/code/artifact/ef6ce45a-28c7-4b01-b1ab-b3431532bf22)",
+   "The Anatomy of a Return (https://claude.ai/code/artifact/7167b6ba-321d-41f4-803d-a132a611922d)"
+  ],
+  "check": "Q: Daily equity mean is 0.04 percent and volatility 1.2 percent. What share of E[r squared] is the mean? A: About one part in a thousand, since (sigma/mu) squared is 900."
+ },
+ {
+  "title": "Skewness",
+  "domain": "Stochastics",
+  "one_line": "Skewness is the average cubed standardised deviation, so it measures which tail is stretched by distance rather than which side is crowded, and it is the first free descriptor of shape.",
+  "depends_on": [
+   "Moments"
+  ],
+  "sources": [
+   "The Anatomy of a Return (https://claude.ai/code/artifact/7167b6ba-321d-41f4-803d-a132a611922d)",
+   "The Second Moment (https://claude.ai/code/artifact/f752817b-76e9-4098-af91-44dde50e19de)"
+  ],
+  "check": "Q: A lottery loses one dollar with probability 0.999 and wins 999 with probability 0.001. What is its skewness sign? A: Strongly positive, plus 31.58, even though 99.9 percent of outcomes sit below the mean."
+ },
+ {
+  "title": "Kurtosis",
+  "domain": "Stochastics",
+  "one_line": "Kurtosis is the average fourth standardised power, which weights a five sigma day 625 times a one sigma day, so it is a statement about tail dominance and about how few days set the number.",
+  "depends_on": [
+   "Moments"
+  ],
+  "sources": [
+   "The Anatomy of a Return (https://claude.ai/code/artifact/7167b6ba-321d-41f4-803d-a132a611922d)",
+   "The Coordinates of a Return (https://claude.ai/code/artifact/ef6ce45a-28c7-4b01-b1ab-b3431532bf22)"
+  ],
+  "check": "Q: For a fat tailed sample of 100,000 draws, what share of the kurtosis came from the ten largest observations? A: About 20 percent, against 0.95 percent for a Gaussian."
+ },
+ {
+  "title": "Power law tail",
+  "domain": "Stochastics",
+  "one_line": "A power law tail has exceedance probability falling like a constant times x to the minus alpha, which plots as a straight line on log log axes rather than curving away as a Gaussian does.",
+  "depends_on": [
+   "Random variable"
+  ],
+  "sources": [
+   "EQI ch.2 §2.1.5",
+   "The Coordinates of a Return (https://claude.ai/code/artifact/ef6ce45a-28c7-4b01-b1ab-b3431532bf22)",
+   "The Anatomy of a Return (https://claude.ai/code/artifact/7167b6ba-321d-41f4-803d-a132a611922d)"
+  ],
+  "check": "Q: How do you read a tail index off a survival plot? A: Fit the slope of the straight region on log log axes; the slope is minus alpha."
+ },
+ {
+  "title": "Tail index",
+  "domain": "Stochastics",
+  "one_line": "The tail index alpha of a power law is not a description of thickness but a cutoff: it says which moments exist, and how fast the once in N event grows with N.",
+  "depends_on": [
+   "Power law tail"
+  ],
+  "sources": [
+   "EQI ch.2 §2.1.5",
+   "The Coordinates of a Return (https://claude.ai/code/artifact/ef6ce45a-28c7-4b01-b1ab-b3431532bf22)",
+   "The Anatomy of a Return (https://claude.ai/code/artifact/7167b6ba-321d-41f4-803d-a132a611922d)"
+  ],
+  "check": "Q: How large is the one in a million event under alpha = 4, 3 and 2? A: About 32, 100 and 1000 sigma, against 4.8 sigma for a Gaussian."
+ },
+ {
+  "title": "Existence of a moment",
+  "domain": "Stochastics",
+  "one_line": "A moment of order k is finite if and only if k is below the tail index, so a fat tail does not make a moment large, it makes the moment fail to exist.",
+  "depends_on": [
+   "Moments",
+   "Tail index"
+  ],
+  "sources": [
+   "EQI ch.2 §2.1.5",
+   "The Anatomy of a Return (https://claude.ai/code/artifact/7167b6ba-321d-41f4-803d-a132a611922d)",
+   "Four Numbers and What They Threw Away (https://claude.ai/code/artifact/0b20a92e-dc03-4b4c-aa3e-0a8a0c320608)"
+  ],
+  "check": "Q: With alpha about 4, which of variance, skewness and kurtosis are safe? A: Variance comfortably, skewness marginally, kurtosis right on the boundary and nothing above it."
+ },
+ {
+  "title": "Poisson distribution",
+  "domain": "Stochastics",
+  "one_line": "The Poisson is the binomial limit with many trials each rare, holding the expected count lambda fixed, and having collapsed two parameters into one it must have variance equal to mean.",
+  "depends_on": [
+   "Binomial distribution"
+  ],
+  "sources": [
+   "The Anatomy of a Return (https://claude.ai/code/artifact/7167b6ba-321d-41f4-803d-a132a611922d)"
+  ],
+  "check": "Q: What single falsifiable prediction does a Poisson make with nowhere to hide? A: Variance equals mean, so the ratio of the two must be exactly one."
+ },
+ {
+  "title": "Fano factor",
+  "domain": "Stochastics",
+  "one_line": "The Fano factor is the ratio of variance to mean, exactly one for any Poisson, so a measured value far from one refuses the model on its own prediction with no rival named.",
+  "depends_on": [
+   "Poisson distribution",
+   "Variance"
+  ],
+  "sources": [
+   "The Anatomy of a Return (https://claude.ai/code/artifact/7167b6ba-321d-41f4-803d-a132a611922d)"
+  ],
+  "check": "Q: The crow year had mean 14.29 and variance 80.6. What is the Fano factor and the verdict? A: 5.64, so the Poisson is refused by a factor of five and a half."
+ },
+ {
+  "title": "Law of total variance",
+  "domain": "Stochastics",
+  "one_line": "The variance of a variable equals the expected conditional variance plus the variance of the conditional mean, so treating a moving parameter as fixed adds exactly the second term.",
+  "depends_on": [
+   "Variance",
+   "Expectation"
+  ],
+  "sources": [
+   "The Anatomy of a Return (https://claude.ai/code/artifact/7167b6ba-321d-41f4-803d-a132a611922d)"
+  ],
+  "check": "Q: A Poisson count whose rate is itself random has what variance? A: E[lambda] plus Var(lambda); the second term is the entire excess over Poisson."
+ },
+ {
+  "title": "Mixture distribution",
+  "domain": "Stochastics",
+  "one_line": "A mixture flips a coin and draws from one of several laws, which keeps the ingredients visible as separate lumps and is the operation that manufactures fat tails.",
+  "depends_on": [
+   "Random variable"
+  ],
+  "sources": [
+   "Which Bell Is Which (https://claude.ai/code/artifact/dff7b48e-6611-4b55-aa29-0d3a4e85b124)",
+   "The Anatomy of a Return (https://claude.ai/code/artifact/7167b6ba-321d-41f4-803d-a132a611922d)",
+   "The Coordinates of a Return (https://claude.ai/code/artifact/ef6ce45a-28c7-4b01-b1ab-b3431532bf22)"
+  ],
+  "check": "Q: Mix 88 percent N(0, 0.72 squared) with 12 percent N(0, 2.2 squared). What kurtosis results? A: 8.5, from two Gaussians and no fat tailed ingredient at all."
+ },
+ {
+  "title": "Mixing is not adding",
+  "domain": "Stochastics",
+  "one_line": "Adding independent variables preserves the bell by the central limit theorem, while mixing distributions produces humps and fat tails belonging to none of the parts.",
+  "depends_on": [
+   "Mixture distribution",
+   "Central limit theorem"
+  ],
+  "sources": [
+   "Which Bell Is Which (https://claude.ai/code/artifact/dff7b48e-6611-4b55-aa29-0d3a4e85b124)"
+  ],
+  "check": "Q: Two Gaussians at minus 2 and plus 2 are added, then mixed. What kurtosis does each produce? A: 3.003 when added, still a bell, and 1.721 with two humps when mixed."
+ },
+ {
+  "title": "Negative binomial distribution",
+  "domain": "Stochastics",
+  "one_line": "Giving a Poisson rate its own gamma distribution and integrating it out produces the negative binomial, which is the standard model of an overdispersed count.",
+  "depends_on": [
+   "Poisson distribution",
+   "Mixture distribution"
+  ],
+  "sources": [
+   "The Anatomy of a Return (https://claude.ai/code/artifact/7167b6ba-321d-41f4-803d-a132a611922d)",
+   "Where All This Came From (https://claude.ai/code/artifact/5753ff9b-dc66-43ac-a7be-b4cba10dcd4e)"
+  ],
+  "check": "Q: A gamma mixed Poisson gave P(X = 0) of 0.1248 against 0.0496 for a plain Poisson of the same mean. Which model is which? A: The mixture is the negative binomial, with Fano 2.004 against 1.000."
+ },
+ {
+  "title": "Exponential distribution",
+  "domain": "Stochastics",
+  "one_line": "The waiting time until the next Poisson event has survival function exp(minus lambda t), a law that also follows from memorylessness alone with no mention of Poisson.",
+  "depends_on": [
+   "Poisson distribution"
+  ],
+  "sources": [
+   "The Anatomy of a Return (https://claude.ai/code/artifact/7167b6ba-321d-41f4-803d-a132a611922d)"
+  ],
+  "check": "Q: Give two independent routes to the exponential. A: Zero Poisson events by time t, and the functional equation from memorylessness."
+ },
+ {
+  "title": "Memorylessness",
+  "domain": "Stochastics",
+  "one_line": "A wait is memoryless when the chance of waiting a further t does not depend on how long you have already waited, and the only continuous laws satisfying that are exponential.",
+  "depends_on": [
+   "Exponential distribution"
+  ],
+  "sources": [
+   "The Anatomy of a Return (https://claude.ai/code/artifact/7167b6ba-321d-41f4-803d-a132a611922d)"
+  ],
+  "check": "Q: State memorylessness in symbols. A: P(T > s + t given T > s) equals P(T > t), so S(s+t) = S(s)S(t)."
+ },
+ {
+  "title": "Gamma distribution",
+  "domain": "Stochastics",
+  "one_line": "Adding k independent exponential waits gives a gamma, whose peak lifts off zero as k grows because waiting for five events is rarely quick.",
+  "depends_on": [
+   "Exponential distribution"
+  ],
+  "sources": [
+   "The Anatomy of a Return (https://claude.ai/code/artifact/7167b6ba-321d-41f4-803d-a132a611922d)"
+  ],
+  "check": "Q: What is a gamma with shape k equal to one? A: Exactly the exponential distribution."
+ },
+ {
+  "title": "Chi-squared distribution",
+  "domain": "Stochastics",
+  "one_line": "A chi-squared with k degrees of freedom is the sum of k squared standard Gaussians, so it is the law of any quantity built from squares, with mean k and variance 2k.",
+  "depends_on": [
+   "Gamma distribution",
+   "Gaussian distribution"
+  ],
+  "sources": [
+   "The Anatomy of a Return (https://claude.ai/code/artifact/7167b6ba-321d-41f4-803d-a132a611922d)",
+   "Evaluating Risk (https://claude.ai/code/artifact/b5aa3c86-7448-44e1-83ee-911457ecc245)"
+  ],
+  "check": "Q: What is the relative noise of a chi-squared with k degrees of freedom divided by k? A: The square root of 2 over k, so 1.41 at k = 1 and 0.16 at k = 78."
+ },
+ {
+  "title": "Student's t distribution",
+  "domain": "Stochastics",
+  "one_line": "Dividing a standard Gaussian by the square root of an independent scaled chi-squared gives Student's t, a Gaussian that admits it does not know its variance, with tail index equal to its degrees of freedom.",
+  "depends_on": [
+   "Gaussian distribution",
+   "Chi-squared distribution",
+   "Mixture distribution"
+  ],
+  "sources": [
+   "The Anatomy of a Return (https://claude.ai/code/artifact/7167b6ba-321d-41f4-803d-a132a611922d)"
+  ],
+  "check": "Q: What is the tail index of a Student t with 3 degrees of freedom, and does its kurtosis exist? A: Alpha equals 3, so the fourth moment does not exist."
+ },
+ {
+  "title": "Lognormal distribution",
+  "domain": "Stochastics",
+  "one_line": "A product of many small independent positive factors has a Gaussian logarithm, so the lognormal is the Gaussian written in a multiplicative coordinate and is the law of a compounding price.",
+  "depends_on": [
+   "Gaussian distribution",
+   "Logarithm as a group isomorphism"
+  ],
+  "sources": [
+   "The Anatomy of a Return (https://claude.ai/code/artifact/7167b6ba-321d-41f4-803d-a132a611922d)",
+   "Where All This Came From (https://claude.ai/code/artifact/5753ff9b-dc66-43ac-a7be-b4cba10dcd4e)"
+  ],
+  "check": "Q: Why is the 1 over y factor in the lognormal density there? A: It is the Jacobian of the log transform, nothing more."
+ },
+ {
+  "title": "Maximum entropy principle",
+  "domain": "Stochastics",
+  "one_line": "Among all laws satisfying your constraints, choose the one that assumes least beyond them, and the famous distributions fall out one by one as answers to specific confessions of ignorance.",
+  "depends_on": [
+   "Gaussian distribution",
+   "Exponential distribution"
+  ],
+  "sources": [
+   "The Anatomy of a Return (https://claude.ai/code/artifact/7167b6ba-321d-41f4-803d-a132a611922d)"
+  ],
+  "check": "Q: Which law is maximum entropy given a known mean and variance on the whole line? A: The Gaussian, with entropy 1.4189 which is half the log of 2 pi e."
+ },
+ {
+  "title": "Characteristic function",
+  "domain": "Stochastics",
+  "one_line": "The characteristic function is the expected value of exp(itX), a Fourier transform that always converges and determines the distribution uniquely, unlike the list of moments.",
+  "depends_on": [
+   "Moments",
+   "Random variable"
+  ],
+  "sources": [
+   "Where All This Came From (https://claude.ai/code/artifact/5753ff9b-dc66-43ac-a7be-b4cba10dcd4e)"
+  ],
+  "check": "Q: Two densities share every moment exactly. What separates them? A: Their characteristic functions, which differ by up to 0.094."
+ },
+ {
+  "title": "Model versus estimator",
+  "domain": "Stochastics",
+  "one_line": "A model is a recipe with knobs, data is one run of it, and an estimator is a formula that guesses a knob from data, so an estimator is itself random because the data were.",
+  "depends_on": [
+   "Random variable"
+  ],
+  "sources": [
+   "Where All This Came From (https://claude.ai/code/artifact/5753ff9b-dc66-43ac-a7be-b4cba10dcd4e)",
+   "The Anatomy of a Return (https://claude.ai/code/artifact/7167b6ba-321d-41f4-803d-a132a611922d)"
+  ],
+  "check": "Q: Why must p and p hat carry different symbols? A: p is a fixed unknown knob of the world; p hat is a function of data, so it is random and it changes when you rerun the year."
+ },
+ {
+  "title": "Likelihood function",
+  "domain": "Stochastics",
+  "one_line": "The likelihood is the same algebraic expression as the probability mass, read as a function of the parameter with the data held fixed, and it is not a probability distribution over the parameter.",
+  "depends_on": [
+   "Model versus estimator",
+   "Independence"
+  ],
+  "sources": [
+   "The Anatomy of a Return (https://claude.ai/code/artifact/7167b6ba-321d-41f4-803d-a132a611922d)",
+   "Where All This Came From (https://claude.ai/code/artifact/5753ff9b-dc66-43ac-a7be-b4cba10dcd4e)"
+  ],
+  "check": "Q: Integrate the Bernoulli likelihood over p after seeing 7 crows in 20 days. A: It comes to 1 over 21, not 1, which is why it is not a density over p."
+ },
+ {
+  "title": "Log-likelihood",
+  "domain": "Stochastics",
+  "one_line": "The log-likelihood is the logarithm of the likelihood, taken because log is monotone so the answer does not move, because it turns products into sums, and because without it the arithmetic underflows to zero.",
+  "depends_on": [
+   "Likelihood function",
+   "Logarithm as a group isomorphism"
+  ],
+  "sources": [
+   "Where All This Came From (https://claude.ai/code/artifact/5753ff9b-dc66-43ac-a7be-b4cba10dcd4e)",
+   "The Anatomy of a Return (https://claude.ai/code/artifact/7167b6ba-321d-41f4-803d-a132a611922d)"
+  ],
+  "check": "Q: At what sample size does a raw Bernoulli likelihood underflow a double? A: Around n = 1200, where it stores as exactly zero while the log-likelihood is an ordinary minus 647."
+ },
+ {
+  "title": "Maximum likelihood estimation",
+  "domain": "Stochastics",
+  "one_line": "Maximum likelihood picks the parameter under which what actually happened was least surprising, which is a maximisation and not necessarily the solution of a derivative set to zero.",
+  "depends_on": [
+   "Log-likelihood"
+  ],
+  "sources": [
+   "Where All This Came From (https://claude.ai/code/artifact/5753ff9b-dc66-43ac-a7be-b4cba10dcd4e)",
+   "The Anatomy of a Return (https://claude.ai/code/artifact/7167b6ba-321d-41f4-803d-a132a611922d)"
+  ],
+  "check": "Q: For n uniform draws on [0, theta], what is the MLE and why does no derivative find it? A: The sample maximum; the likelihood is zero below it and decreasing above, so the optimum sits on a cliff edge."
+ },
+ {
+  "title": "Fisher information",
+  "domain": "Stochastics",
+  "one_line": "The curvature of the log-likelihood at its maximum is the Fisher information, and the reciprocal square root of that curvature is the standard error of the estimate.",
+  "depends_on": [
+   "Log-likelihood",
+   "Taylor expansion"
+  ],
+  "sources": [
+   "The Anatomy of a Return (https://claude.ai/code/artifact/7167b6ba-321d-41f4-803d-a132a611922d)",
+   "Which Bell Is Which (https://claude.ai/code/artifact/dff7b48e-6611-4b55-aa29-0d3a4e85b124)"
+  ],
+  "check": "Q: Curvature at the peak measured minus 87.912. What standard error does that imply? A: 0.106654, the same number as the square root of p(1-p)/n."
+ },
+ {
+  "title": "Method of moments",
+  "domain": "Stochastics",
+  "one_line": "The method of moments sets sample moments equal to model moments and solves, which needs no calculus and was the first general recipe for turning data into parameters.",
+  "depends_on": [
+   "Moments",
+   "Model versus estimator"
+  ],
+  "sources": [
+   "Where All This Came From (https://claude.ai/code/artifact/5753ff9b-dc66-43ac-a7be-b4cba10dcd4e)"
+  ],
+  "check": "Q: For a uniform on [0, theta], what does the method of moments give? A: Twice the sample mean, unbiased with spread 1.667 against the MLE's biased 9.230 with spread 0.714."
+ },
+ {
+  "title": "Bias of an estimator",
+  "domain": "Stochastics",
+  "one_line": "The bias of an estimator is the gap between its average and the truth, and an unbiased estimator can still be useless because unbiasedness constrains the centre and says nothing about the spread.",
+  "depends_on": [
+   "Model versus estimator",
+   "Expectation"
+  ],
+  "sources": [
+   "Where All This Came From (https://claude.ai/code/artifact/5753ff9b-dc66-43ac-a7be-b4cba10dcd4e)",
+   "Evaluating Risk (https://claude.ai/code/artifact/b5aa3c86-7448-44e1-83ee-911457ecc245)"
+  ],
+  "check": "Q: A squared return is unbiased for variance. How often does it land within 20 percent of the truth? A: About 9.8 percent of days, because its median reads only 0.45 of the truth."
+ },
+ {
+  "title": "Bias variance tradeoff",
+  "domain": "Stochastics",
+  "one_line": "Bias and spread are separate complaints and you may trade one for the other, so a biased but tight estimator routinely beats an unbiased but wild one on total error.",
+  "depends_on": [
+   "Bias of an estimator",
+   "Variance"
+  ],
+  "sources": [
+   "Where All This Came From (https://claude.ai/code/artifact/5753ff9b-dc66-43ac-a7be-b4cba10dcd4e)",
+   "Evaluating Risk (https://claude.ai/code/artifact/b5aa3c86-7448-44e1-83ee-911457ecc245)"
+  ],
+  "check": "Q: On the uniform ceiling problem, which of three estimators won on RMSE? A: The bias corrected MLE at 0.772, beating both the unbiased 1.666 and the raw MLE 1.049."
+ },
+ {
+  "title": "Rule of succession",
+  "domain": "Stochastics",
+  "one_line": "Starting from a uniform prior and updating on data gives the posterior mean (k+1)/(n+2), which differs from maximum likelihood exactly where data are thin and agrees once data arrive.",
+  "depends_on": [
+   "Likelihood function",
+   "Maximum likelihood estimation"
+  ],
+  "sources": [
+   "Where All This Came From (https://claude.ai/code/artifact/5753ff9b-dc66-43ac-a7be-b4cba10dcd4e)"
+  ],
+  "check": "Q: Zero crows in three days. What do maximum likelihood and Bayes report? A: 0.0000 and 0.2000, so likelihood declares a crow impossible forever on three days of evidence."
+ },
+ {
+  "title": "Shrinkage estimation",
+  "domain": "Stochastics",
+  "one_line": "Shrinkage deliberately accepts bias by pulling many separate estimates toward a common target, buying a reduction in variance that is worth more when parameters are many and observations few.",
+  "depends_on": [
+   "Bias variance tradeoff"
+  ],
+  "sources": [
+   "Where All This Came From (https://claude.ai/code/artifact/5753ff9b-dc66-43ac-a7be-b4cba10dcd4e)",
+   "Fundamental Factor Models (https://claude.ai/code/artifact/ffbcd609-5980-4991-a3d5-21c17e9b5e41)",
+   "Statistical Factor Models (https://claude.ai/code/artifact/3b8a1936-8d6c-419e-9060-0420a9bdd8ae)"
+  ],
+  "check": "Q: On a factor covariance from 40 observations, what did shrinking at rho = 0.1 buy and what did rho = 0.9 cost? A: It cut the realised risk penalty from 10.68 to 8.62 percent, while 0.9 pushed it to 40.4 percent."
+ },
+ {
+  "title": "Model selection",
+  "domain": "Stochastics",
+  "one_line": "Choosing which family to fit is a different job from fitting inside one, and likelihood alone cannot do it because a family containing another can never fit worse.",
+  "depends_on": [
+   "Maximum likelihood estimation"
+  ],
+  "sources": [
+   "Where All This Came From (https://claude.ai/code/artifact/5753ff9b-dc66-43ac-a7be-b4cba10dcd4e)"
+  ],
+  "check": "Q: Six datasets were genuinely Poisson. How often did the negative binomial reach the higher likelihood? A: Six times out of six, which is guaranteed rather than lucky."
+ },
+ {
+  "title": "AIC and BIC",
+  "domain": "Stochastics",
+  "one_line": "AIC and BIC keep the log-likelihood but charge rent per parameter, two per knob for AIC and log n per knob for BIC, so extra parameters have to earn their fee.",
+  "depends_on": [
+   "Model selection",
+   "Log-likelihood"
+  ],
+  "sources": [
+   "Where All This Came From (https://claude.ai/code/artifact/5753ff9b-dc66-43ac-a7be-b4cba10dcd4e)",
+   "Statistical Factor Models (https://claude.ai/code/artifact/3b8a1936-8d6c-419e-9060-0420a9bdd8ae)"
+  ],
+  "check": "Q: Write AIC and BIC. A: AIC = minus 2 log L + 2k and BIC = minus 2 log L + k log n, lower being better."
+ },
+ {
+  "title": "Held-out validation",
+  "domain": "Stochastics",
+  "one_line": "Scoring a fitted model on data it never saw removes the reward for memorising noise, and needs no formula at all.",
+  "depends_on": [
+   "Model selection"
+  ],
+  "sources": [
+   "Where All This Came From (https://claude.ai/code/artifact/5753ff9b-dc66-43ac-a7be-b4cba10dcd4e)",
+   "Evaluating Risk (https://claude.ai/code/artifact/b5aa3c86-7448-44e1-83ee-911457ecc245)"
+  ],
+  "check": "Q: On the crow year the Poisson scored minus 837 held out and the negative binomial minus 631. Which wins and why is this convincing? A: The negative binomial, and it is convincing because memorised noise cannot help on unseen data."
+ },
+ {
+  "title": "Stationarity",
+  "domain": "Stochastics",
+  "one_line": "A process is stationary when its statistical description does not depend on when you look, which is exactly the claim that licenses pooling many dates into one estimate.",
+  "depends_on": [
+   "Random variable",
+   "Identically distributed"
+  ],
+  "sources": [
+   "EQI ch.2 §2.1.5",
+   "The Anatomy of a Return (https://claude.ai/code/artifact/7167b6ba-321d-41f4-803d-a132a611922d)",
+   "The Coordinates of a Return (https://claude.ai/code/artifact/ef6ce45a-28c7-4b01-b1ab-b3431532bf22)",
+   "Four Numbers and What They Threw Away (https://claude.ai/code/artifact/0b20a92e-dc03-4b4c-aa3e-0a8a0c320608)"
+  ],
+  "check": "Q: What does stationarity buy that independence does not? A: Permission to pool observations across time, which is what turns one year into 365 usable draws."
+ },
+ {
+  "title": "Strict versus covariance stationarity",
+  "domain": "Stochastics",
+  "one_line": "Covariance stationarity asks for a constant mean and finite constant variance, while strict stationarity asks only that the joint law be shift invariant, so a process can be strictly stationary with infinite variance.",
+  "depends_on": [
+   "Stationarity",
+   "Existence of a moment"
+  ],
+  "sources": [
+   "EQI ch.2 §2.2.2",
+   "The Anatomy of a Return (https://claude.ai/code/artifact/7167b6ba-321d-41f4-803d-a132a611922d)",
+   "Three Roads to One Hidden Number (https://claude.ai/code/artifact/7933d34c-7c45-4c12-9671-be94ddc9d9a7)"
+  ],
+  "check": "Q: A Student t with tail index 1.5 has running sample variances ending at 724, 148, 332 and 126. Which stationarity does it have? A: Strict but not covariance stationarity."
+ },
+ {
+  "title": "Ergodicity",
+  "domain": "Stochastics",
+  "one_line": "Ergodicity says the time average of one long path converges to the ensemble average across parallel universes, and it is strictly stronger than stationarity and the assumption that fails quietly.",
+  "depends_on": [
+   "Stationarity",
+   "Law of large numbers"
+  ],
+  "sources": [
+   "The Anatomy of a Return (https://claude.ai/code/artifact/7167b6ba-321d-41f4-803d-a132a611922d)"
+  ],
+  "check": "Q: One path pooled over a year gave mean 14.29 and sd 8.98 against an ensemble 14.05 and 9.13. What does that coincidence demonstrate? A: Ergodicity, which is what licenses substituting time for parallel worlds."
+ },
+ {
+  "title": "Autocorrelation function",
+  "domain": "Stochastics",
+  "one_line": "The autocorrelation at lag k is the correlation of a series with a copy of itself shifted k steps, and bars inside the band of plus or minus 1.96 over the root of T are indistinguishable from nothing.",
+  "depends_on": [
+   "Correlation",
+   "Stationarity"
+  ],
+  "sources": [
+   "The Anatomy of a Return (https://claude.ai/code/artifact/7167b6ba-321d-41f4-803d-a132a611922d)",
+   "The Coordinates of a Return (https://claude.ai/code/artifact/ef6ce45a-28c7-4b01-b1ab-b3431532bf22)"
+  ],
+  "check": "Q: With 400 observations, where does the significance band sit? A: At plus or minus 0.098, so any bar inside it could easily be zero."
+ },
+ {
+  "title": "Markov property",
+  "domain": "Stochastics",
+  "one_line": "A process is Markov when the future depends on the past only through the present, so the current state is a sufficient summary and no earlier history adds anything.",
+  "depends_on": [
+   "Random variable"
+  ],
+  "sources": [
+   "The Anatomy of a Return (https://claude.ai/code/artifact/7167b6ba-321d-41f4-803d-a132a611922d)"
+  ],
+  "check": "Q: Paths lined up at zero and split by whether they were rising or falling ended twelve steps later at plus 0.05 and minus 0.02. What does that say? A: The process is Markov; knowing the past bought nothing once the present was known."
+ },
+ {
+  "title": "Filtration",
+  "domain": "Stochastics",
+  "one_line": "A filtration is the growing record of everything observable up to each time, and it exists to make precise which information a forecast is allowed to use.",
+  "depends_on": [
+   "Random variable"
+  ],
+  "sources": [
+   "The Anatomy of a Return (https://claude.ai/code/artifact/7167b6ba-321d-41f4-803d-a132a611922d)"
+  ],
+  "check": "Q: What is the difference between conditioning on the filtration and on yesterday alone? A: The first uses everything known; they coincide only for a Markov process."
+ },
+ {
+  "title": "Martingale",
+  "domain": "Stochastics",
+  "one_line": "A martingale is a process whose best forecast of tomorrow is today, and because its increments are uncorrelated its variance can only grow, so with finite variance the only stationary martingale is a constant.",
+  "depends_on": [
+   "Filtration",
+   "Expectation"
+  ],
+  "sources": [
+   "The Anatomy of a Return (https://claude.ai/code/artifact/7167b6ba-321d-41f4-803d-a132a611922d)"
+  ],
+  "check": "Q: Which of log price and return is the martingale, and which is stationary? A: Log price is the martingale and is not stationary; the return is the martingale difference and is stationary."
+ },
+ {
+  "title": "Conditional expectation as the best forecast",
+  "domain": "Stochastics",
+  "one_line": "Under squared loss the forecast minimising expected error given x is the conditional expectation of y given x, because the cross term dies and only an unavoidable noise floor plus a squared penalty remain.",
+  "depends_on": [
+   "Expectation",
+   "Projection onto a subspace"
+  ],
+  "sources": [
+   "EQI ch.4 §4.7.1, eq (4.6) to (4.7)",
+   "Linear Models of Returns (https://claude.ai/code/artifact/95edfc2a-c498-44a6-b8ab-08b05a4ec5a8)"
+  ],
+  "check": "Q: Which two facts kill the cross term in the completed square? A: The forecast is a function of x alone, and the leftover has zero conditional mean."
+ },
+ {
+  "title": "State-space model",
+  "domain": "Stochastics",
+  "one_line": "A state-space model pairs an evolution equation for a hidden state with an observation equation that shows it through noise, and recovering the state from observations is called filtering.",
+  "depends_on": [
+   "Markov property",
+   "Random variable"
+  ],
+  "sources": [
+   "EQI ch.2 §2.1.4",
+   "The Coordinates of a Return (https://claude.ai/code/artifact/ef6ce45a-28c7-4b01-b1ab-b3431532bf22)",
+   "The Anatomy of a Return (https://claude.ai/code/artifact/7167b6ba-321d-41f4-803d-a132a611922d)",
+   "Three Roads to One Hidden Number (https://claude.ai/code/artifact/7933d34c-7c45-4c12-9671-be94ddc9d9a7)"
+  ],
+  "check": "Q: In the plane and radar analogy, what are the two separate error sources? A: The plane genuinely moved, which is process noise, and the instrument genuinely lied, which is observation noise."
+ },
+ {
+  "title": "Kalman filter",
+  "domain": "Stochastics",
+  "one_line": "For a linear Gaussian state-space model the optimal filter has a closed form: the new belief is the old belief plus a gain times the surprise, and the gain is a regression coefficient.",
+  "depends_on": [
+   "State-space model",
+   "Gaussian distribution",
+   "Conditional expectation as the best forecast"
+  ],
+  "sources": [
+   "EQI ch.2 §2.4",
+   "Three Roads to One Hidden Number (https://claude.ai/code/artifact/7933d34c-7c45-4c12-9671-be94ddc9d9a7)",
+   "The Anatomy of a Return (https://claude.ai/code/artifact/7167b6ba-321d-41f4-803d-a132a611922d)"
+  ],
+  "check": "Q: Which single fact about Gaussians does the whole derivation rest on? A: That a jointly Gaussian conditional is Gaussian with mean mu_x plus Sigma_xy Sigma_yy inverse times the surprise."
+ },
+ {
+  "title": "Kalman gain",
+  "domain": "Stochastics",
+  "one_line": "The gain answers how much to believe today's observation against what you already thought, and its value is set by the ratio of process noise to observation noise.",
+  "depends_on": [
+   "Kalman filter",
+   "Normal equations"
+  ],
+  "sources": [
+   "EQI ch.2 §2.1.4, §2.3.1",
+   "The Coordinates of a Return (https://claude.ai/code/artifact/ef6ce45a-28c7-4b01-b1ab-b3431532bf22)",
+   "Three Roads to One Hidden Number (https://claude.ai/code/artifact/7933d34c-7c45-4c12-9671-be94ddc9d9a7)"
+  ],
+  "check": "Q: With signal to noise lambda, what is the steady state gain? A: K = (sqrt(lambda squared plus 4 lambda) minus lambda)/2, which tends to one for clean prices and zero for noisy ones."
+ },
+ {
+  "title": "Exponentially weighted moving average",
+  "domain": "Stochastics",
+  "one_line": "An EWMA blends the newest observation with the previous estimate at a fixed weight, and it is the steady state optimal filter for a random walk state observed in noise.",
+  "depends_on": [
+   "Expectation"
+  ],
+  "sources": [
+   "EQI ch.2 §2.3.1, eq (2.20)",
+   "Three Roads to One Hidden Number (https://claude.ai/code/artifact/7933d34c-7c45-4c12-9671-be94ddc9d9a7)",
+   "Fundamental Factor Models (https://claude.ai/code/artifact/ffbcd609-5980-4991-a3d5-21c17e9b5e41)"
+  ],
+  "check": "Q: What is the half-life of an EWMA whose memory coefficient is K? A: minus log 2 over log K, so persistence 0.97 gives 23 days and 0.995 gives 138."
+ },
+ {
+  "title": "Random recursive equation",
+  "domain": "Stochastics",
+  "one_line": "A random recursive equation is an autoregression whose coefficient is itself redrawn each period, so its fate is decided by a product of random numbers and hence by the expectation of the log, not the log of the expectation.",
+  "depends_on": [
+   "Independent and identically distributed",
+   "Jensen's inequality"
+  ],
+  "sources": [
+   "EQI ch.2 §2.2.2",
+   "Three Roads to One Hidden Number (https://claude.ai/code/artifact/7933d34c-7c45-4c12-9671-be94ddc9d9a7)",
+   "The Anatomy of a Return (https://claude.ai/code/artifact/7167b6ba-321d-41f4-803d-a132a611922d)"
+  ],
+  "check": "Q: A GARCH coefficient has arithmetic mean 0.985 and geometric mean 0.978. Which decides stability? A: The geometric mean, so a process whose average coefficient exceeds one can still converge almost surely."
+ },
+ {
+  "title": "Kesten's theorem",
+  "domain": "Stochastics",
+  "one_line": "For a stationary random recursive equation the tail is a power law whose index solves E[a to the alpha over 2] equals one, so the tail index is determined by the model rather than assumed.",
+  "depends_on": [
+   "Random recursive equation",
+   "Tail index"
+  ],
+  "sources": [
+   "EQI ch.2 §2.2.2",
+   "Three Roads to One Hidden Number (https://claude.ai/code/artifact/7933d34c-7c45-4c12-9671-be94ddc9d9a7)"
+  ],
+  "check": "Q: Where do fitted equity GARCH parameters land on the Kesten contours? A: Squarely in the band where the implied tail index is between 4 and 6, exactly where the data live."
+ },
+ {
+  "title": "Proper scoring rule",
+  "domain": "Stochastics",
+  "one_line": "A scoring rule is proper when the only way to minimise the expected score is to report your honest forecast, so a conservative or a flattering answer both cost you.",
+  "depends_on": [
+   "Log-likelihood"
+  ],
+  "sources": [
+   "EQI ch.2 §2.2.3",
+   "Three Roads to One Hidden Number (https://claude.ai/code/artifact/7933d34c-7c45-4c12-9671-be94ddc9d9a7)",
+   "Evaluating Risk (https://claude.ai/code/artifact/b5aa3c86-7448-44e1-83ee-911457ecc245)"
+  ],
+  "check": "Q: Minimise log h squared plus r squared over h squared over h. A: The minimum sits exactly at h squared equal to r squared, so the loss cannot be gamed."
+ },
+ {
+  "title": "Ordinary least squares",
+  "domain": "Stochastics",
+  "one_line": "Ordinary least squares minimises the summed squared residual, which is the projection of the outcome onto the column space of the predictors and gives beta hat from the normal equations.",
+  "depends_on": [
+   "Normal equations",
+   "Conditional expectation as the best forecast"
+  ],
+  "sources": [
+   "EQI ch.4 §4.7.1, eq (4.8)",
+   "Linear Models of Returns (https://claude.ai/code/artifact/95edfc2a-c498-44a6-b8ab-08b05a4ec5a8)"
+  ],
+  "check": "Q: Give two independent justifications that land on the identical arithmetic. A: Minimising squared loss, and maximising a Gaussian likelihood with homoskedastic independent errors."
+ },
+ {
+  "title": "Weighted least squares",
+  "domain": "Stochastics",
+  "one_line": "Weighting each observation by the inverse of its noise variance stops the noisiest observations dominating the sum of squared residuals and gives the lowest variance unbiased linear estimate.",
+  "depends_on": [
+   "Ordinary least squares",
+   "Variance"
+  ],
+  "sources": [
+   "EQI ch.6 §6.2, eq (6.2) to (6.3)",
+   "Fundamental Factor Models (https://claude.ai/code/artifact/ffbcd609-5980-4991-a3d5-21c17e9b5e41)"
+  ],
+  "check": "Q: An asset has four times the idiosyncratic volatility of another. What relative weight does WLS give it? A: One sixteenth, because the weight is one over the variance."
+ },
+ {
+  "title": "Frisch-Waugh-Lovell theorem",
+  "domain": "Stochastics",
+  "one_line": "Regressing in stages gives numerically identical coefficients and residuals to the one shot regression, so a multiple regression coefficient is the simple coefficient on the part of that predictor unique to it.",
+  "depends_on": [
+   "Ordinary least squares",
+   "Projection onto a subspace"
+  ],
+  "sources": [
+   "EQI ch.4 Theorem 4.1, §4.7.2",
+   "Linear Models of Returns (https://claude.ai/code/artifact/95edfc2a-c498-44a6-b8ab-08b05a4ec5a8)"
+  ],
+  "check": "Q: Why can a coefficient flip sign when you add a variable? A: Because the coefficient is paid only for the leftover after everything shared with the other regressors is removed."
+ },
+ {
+  "title": "Collinearity",
+  "domain": "Stochastics",
+  "one_line": "When predictor columns nearly overlap, the smallest singular value shrinks, its square shrinks faster, and the inverse blows the coefficient variance up, so near collinearity guarantees imprecision.",
+  "depends_on": [
+   "Ordinary least squares",
+   "Condition number"
+  ],
+  "sources": [
+   "EQI ch.4 eq (4.13) to (4.15), Exercise 4.2",
+   "Linear Models of Returns (https://claude.ai/code/artifact/95edfc2a-c498-44a6-b8ab-08b05a4ec5a8)",
+   "Fundamental Factor Models (https://claude.ai/code/artifact/ffbcd609-5980-4991-a3d5-21c17e9b5e41)"
+  ],
+  "check": "Q: Two columns went from correlation 0.467 to 0.999. What happened to the coefficient variance? A: It rose from 1.36 to 754.5, a factor of 554, with the noise level held fixed."
+ },
+ {
+  "title": "Pseudo-inverse solution",
+  "domain": "Stochastics",
+  "one_line": "When the design is rank deficient there are infinitely many perfect fits, and the ridgeless or pseudo-inverse answer picks the one of smallest norm, which is a criterion the data is silent about.",
+  "depends_on": [
+   "Collinearity",
+   "Singular value decomposition"
+  ],
+  "sources": [
+   "EQI ch.6 §6.2.1",
+   "Fundamental Factor Models (https://claude.ai/code/artifact/ffbcd609-5980-4991-a3d5-21c17e9b5e41)"
+  ],
+  "check": "Q: Two solutions had norms 0.01015 and 0.02456 and the identical fit. What chose between them? A: The shortness criterion of the pseudo-inverse, which is not a financial reason."
+ },
+ {
+  "title": "t-statistic",
+  "domain": "Stochastics",
+  "one_line": "A t-statistic is an estimate divided by its own standard error, so it tests whether an observed mean could plausibly have come from a distribution whose true mean is zero.",
+  "depends_on": [
+   "Standard error of a sample mean",
+   "Expectation"
+  ],
+  "sources": [
+   "EQI ch.3 §3.3",
+   "Four Numbers and What They Threw Away (https://claude.ai/code/artifact/0b20a92e-dc03-4b4c-aa3e-0a8a0c320608)"
+  ],
+  "check": "Q: Write the t-statistic of a mean estimated from T iid observations. A: mu over sigma divided by the root of T, which equals the per period Sharpe ratio times the square root of T."
+ },
+ {
+  "title": "Newey-West estimator",
+  "domain": "Stochastics",
+  "one_line": "The Newey-West long run variance adds tapered autocovariance terms to the contemporaneous variance, so it corrects a per period variance for the fact that risk is held for more than one period.",
+  "depends_on": [
+   "Autocorrelation function",
+   "Variance of a sum"
+  ],
+  "sources": [
+   "EQI ch.6 §6.3.4",
+   "Fundamental Factor Models (https://claude.ai/code/artifact/ffbcd609-5980-4991-a3d5-21c17e9b5e41)"
+  ],
+  "check": "Q: An AR(1) with lag one autocorrelation 0.17 had naive daily variance 1.04e-04 against a long run 1.50e-04. How much does one lag of Newey-West recover? A: It reaches 1.22e-04, closing about two fifths of the gap."
+ },
+ {
+  "title": "Cantelli's inequality",
+  "domain": "Stochastics",
+  "one_line": "For every distribution with a mean and a variance, the probability of falling lambda below the mean is at most sigma squared over sigma squared plus lambda squared, with a two point law attaining it exactly.",
+  "depends_on": [
+   "Variance",
+   "Expectation"
+  ],
+  "sources": [
+   "EQI ch.3 §3.3",
+   "Four Numbers and What They Threw Away (https://claude.ai/code/artifact/0b20a92e-dc03-4b4c-aa3e-0a8a0c320608)",
+   "The Second Moment (https://claude.ai/code/artifact/f752817b-76e9-4098-af91-44dde50e19de)"
+  ],
+  "check": "Q: At two standard deviations below the mean, what does Cantelli promise and what does a Gaussian deliver? A: At most 20 percent against 2.3 percent, so the bound is nearly nine times loose."
+ },
+ {
+  "title": "Marchenko-Pastur law",
+  "domain": "Stochastics",
+  "one_line": "The eigenvalues of a sample covariance of pure independent noise fill a predictable band whose upper edge is (1 plus the root of gamma) squared, where gamma is assets divided by observations.",
+  "depends_on": [
+   "Eigendecomposition of a symmetric matrix",
+   "Independent and identically distributed"
+  ],
+  "sources": [
+   "EQI ch.7 §7.2.2",
+   "Statistical Factor Models (https://claude.ai/code/artifact/3b8a1936-8d6c-419e-9060-0420a9bdd8ae)"
+  ],
+  "check": "Q: With gamma = 2, what top eigenvalue does pure noise produce? A: About 5.73 against a predicted edge of 5.83, even though every population eigenvalue is exactly one."
+ },
+ {
+  "title": "Eigenvalue detection threshold",
+  "domain": "Stochastics",
+  "one_line": "A population eigenvalue below one plus the square root of gamma cannot be detected at all: its sample eigenvalue sticks at the bulk edge and its eigenvector carries no information about the truth.",
+  "depends_on": [
+   "Marchenko-Pastur law"
+  ],
+  "sources": [
+   "EQI ch.7 §7.2.2, eq (7.29) to (7.32)",
+   "Statistical Factor Models (https://claude.ai/code/artifact/3b8a1936-8d6c-419e-9060-0420a9bdd8ae)"
+  ],
+  "check": "Q: At gamma = 0.5, a real factor of strength 1.4 produced what top eigenvalue and eigenvector cosine? A: 2.90 against a bulk edge of 2.91, with cosine 0.15, so a real factor was invisible."
+ },
+ {
+  "title": "Median",
+  "domain": "Stochastics",
+  "one_line": "The median is the fifty fifty split of a distribution, it minimises expected absolute deviation, and unlike the mean it is a counting statistic blind to how far the tail reaches.",
+  "depends_on": [
+   "Random variable"
+  ],
+  "sources": [
+   "The Anatomy of a Return (https://claude.ai/code/artifact/7167b6ba-321d-41f4-803d-a132a611922d)",
+   "Fundamental Factor Models (https://claude.ai/code/artifact/ffbcd609-5980-4991-a3d5-21c17e9b5e41)"
+  ],
+  "check": "Q: A single plus 200 percent day is added to 250 clean ones. What happens to the median and the mean absolute log return? A: The median rises 0.9 percent and the mean 31.8 percent."
+ },
+ {
+  "title": "Robust z-score",
+  "domain": "Stochastics",
+  "one_line": "Dividing a security's absolute log return by the median of its own recent absolute log returns gives a scale that the outlier under test cannot inflate, unlike a standard deviation.",
+  "depends_on": [
+   "Median",
+   "Log return"
+  ],
+  "sources": [
+   "EQI ch.6 §6.5",
+   "Fundamental Factor Models (https://claude.ai/code/artifact/ffbcd609-5980-4991-a3d5-21c17e9b5e41)"
+  ],
+  "check": "Q: Why a median and not a standard deviation in the denominator? A: Because the outlier you are hunting sits inside the sample, so a mean based scale partly disarms the detector exactly when it is needed."
+ },
+ {
+  "title": "Simple return",
+  "domain": "Quant",
+  "one_line": "A simple return divides the change in price plus any dividend by the starting price, which removes the price level and makes a three dollar stock and a six hundred thousand dollar stock the same kind of object.",
+  "depends_on": [
+   "Random variable",
+   "Share of stock"
+  ],
+  "sources": [
+   "EQI ch.2 §2.1.1",
+   "The Coordinates of a Return (https://claude.ai/code/artifact/ef6ce45a-28c7-4b01-b1ab-b3431532bf22)",
+   "The Anatomy of a Return (https://claude.ai/code/artifact/7167b6ba-321d-41f4-803d-a132a611922d)"
+  ],
+  "check": "Q: What is the support of a simple return, and why does that matter? A: It lives on minus one to infinity, which is not symmetric and is the entire motivation for log returns."
+ },
+ {
+  "title": "Log return",
+  "domain": "Quant",
+  "one_line": "The log return is log of one plus the simple return, the natural coordinate on the time axis because it adds across periods exactly and maps the interval minus one to infinity onto the whole real line.",
+  "depends_on": [
+   "Simple return",
+   "Logarithm as a group isomorphism"
+  ],
+  "sources": [
+   "EQI ch.2 §2.1.3",
+   "The Coordinates of a Return (https://claude.ai/code/artifact/ef6ce45a-28c7-4b01-b1ab-b3431532bf22)",
+   "The Anatomy of a Return (https://claude.ai/code/artifact/7167b6ba-321d-41f4-803d-a132a611922d)"
+  ],
+  "check": "Q: At a 1.2 percent daily move, how large is the error from using the simple return instead? A: About 0.7 basis points, invisible; at a 40 percent annual move it is about 8 percentage points.",
+  "aliases": [
+   "continuously compounded return"
+  ]
+ },
+ {
+  "title": "Simple across assets and log across time",
+  "domain": "Quant",
+  "one_line": "Simple returns add across assets through w transpose r while log returns add across time through their sum, and nothing adds across both, so mixing them silently answers a different question.",
+  "depends_on": [
+   "Simple return",
+   "Log return"
+  ],
+  "sources": [
+   "EQI ch.2 §2.1.3",
+   "The Coordinates of a Return (https://claude.ai/code/artifact/ef6ce45a-28c7-4b01-b1ab-b3431532bf22)",
+   "The Anatomy of a Return (https://claude.ai/code/artifact/7167b6ba-321d-41f4-803d-a132a611922d)"
+  ],
+  "check": "Q: Which coordinate does an optimizer whose objective is w transpose r require? A: Simple returns, because a portfolio log return is not the weighted sum of constituent log returns."
+ },
+ {
+  "title": "Risk-free rate",
+  "domain": "Quant",
+  "one_line": "The risk-free rate is the return on an asset with negligible volatility, taken as a secured overnight rate observed from actual transactions so that an excess return is measured against a rate somebody could really transact at.",
+  "depends_on": [],
+  "sources": [
+   "EQI ch.2 §2.1.2",
+   "The Coordinates of a Return (https://claude.ai/code/artifact/ef6ce45a-28c7-4b01-b1ab-b3431532bf22)"
+  ],
+  "check": "Q: Why did SOFR replace LIBOR as the reference here? A: SOFR is secured and transaction based, while LIBOR was unsecured and survey based, so it was a rate nobody was actually offered."
+ },
+ {
+  "title": "Excess return",
+  "domain": "Quant",
+  "one_line": "Subtracting the risk-free rate from every asset return deletes the financing leg from the algebra, so a dollar neutral book and a fully invested one become the same kind of object.",
+  "depends_on": [
+   "Simple return",
+   "Risk-free rate"
+  ],
+  "sources": [
+   "EQI ch.2 §2.1.2",
+   "The Coordinates of a Return (https://claude.ai/code/artifact/ef6ce45a-28c7-4b01-b1ab-b3431532bf22)",
+   "The Anatomy of a Return (https://claude.ai/code/artifact/7167b6ba-321d-41f4-803d-a132a611922d)",
+   "Four Numbers and What They Threw Away (https://claude.ai/code/artifact/0b20a92e-dc03-4b4c-aa3e-0a8a0c320608)"
+  ],
+  "check": "Q: At a 5 percent risk-free rate and 16 percent volatility, what does forgetting to subtract it add to a reported Sharpe ratio? A: About 0.31, for free, with no strategy attached."
+ },
+ {
+  "title": "Numeraire",
+  "domain": "Quant",
+  "one_line": "The numeraire is the unit wealth is measured in, and switching it from dollars to the money market account is exactly what makes the risk-free asset identically zero rather than merely small.",
+  "depends_on": [
+   "Excess return"
+  ],
+  "sources": [
+   "EQI ch.2 §2.1.1, §2.1.2",
+   "The Coordinates of a Return (https://claude.ai/code/artifact/ef6ce45a-28c7-4b01-b1ab-b3431532bf22)"
+  ],
+  "check": "Q: Why is a change of numeraire stronger than approximating the risk-free asset away? A: In its own units the money market account never moves, so it is exactly zero rather than approximately so."
+ },
+ {
+  "title": "Infinite divisibility",
+  "domain": "Quant",
+  "one_line": "Assuming assets are infinitely divisible turns a portfolio from a point on an integer lattice into a vector in R to the n, which is what makes gradients, convex programs and every optimizer in the book legal.",
+  "depends_on": [
+   "Simple return"
+  ],
+  "sources": [
+   "EQI ch.2 §2.1.1",
+   "The Coordinates of a Return (https://claude.ai/code/artifact/ef6ce45a-28c7-4b01-b1ab-b3431532bf22)"
+  ],
+  "check": "Q: What does portfolio construction become without divisibility? A: Integer programming, which is NP hard, with no gradient and no first order condition."
+ },
+ {
+  "title": "Dollar weights",
+  "domain": "Quant",
+  "one_line": "Writing the portfolio as a vector of monetary amounts rather than fractions makes profit exactly w transpose r, puts risk in dollars of daily P and L, and leaves the sum of positions free.",
+  "depends_on": [
+   "Simple return",
+   "Vector"
+  ],
+  "sources": [
+   "EQI ch.2 §2.1.1",
+   "The Coordinates of a Return (https://claude.ai/code/artifact/ef6ce45a-28c7-4b01-b1ab-b3431532bf22)",
+   "Linear Models of Returns (https://claude.ai/code/artifact/95edfc2a-c498-44a6-b8ab-08b05a4ec5a8)"
+  ],
+  "check": "Q: Why do weights break for a market neutral book? A: Their denominator, the net market value, is zero, so dividing by it is undefined; dollars have no denominator to declare."
+ },
+ {
+  "title": "Net market value",
+  "domain": "Quant",
+  "one_line": "The net market value is the signed sum of the dollar positions, which is left free by the dollar convention so that a long only, a dollar neutral and a 130 over 30 book differ only in that one number.",
+  "depends_on": [
+   "Dollar weights"
+  ],
+  "sources": [
+   "EQI ch.2 §2.1.1",
+   "The Coordinates of a Return (https://claude.ai/code/artifact/ef6ce45a-28c7-4b01-b1ab-b3431532bf22)",
+   "Linear Models of Returns (https://claude.ai/code/artifact/95edfc2a-c498-44a6-b8ab-08b05a4ec5a8)"
+  ],
+  "check": "Q: Three books hold the same gross. What single quantity distinguishes long only from dollar neutral? A: The net market value, which is 100, 0 and 160 dollars respectively in the worked case."
+ },
+ {
+  "title": "Volatility drag",
+  "domain": "Quant",
+  "one_line": "Geometric growth equals the arithmetic mean minus half the variance, so two assets with the same expected simple return compound at completely different rates if their volatilities differ.",
+  "depends_on": [
+   "Log return",
+   "Jensen's inequality",
+   "Taylor expansion"
+  ],
+  "sources": [
+   "EQI ch.2 §2.1.3, Exercise 2.1",
+   "The Coordinates of a Return (https://claude.ai/code/artifact/ef6ce45a-28c7-4b01-b1ab-b3431532bf22)",
+   "The Anatomy of a Return (https://claude.ai/code/artifact/7167b6ba-321d-41f4-803d-a132a611922d)",
+   "The Second Moment (https://claude.ai/code/artifact/f752817b-76e9-4098-af91-44dde50e19de)"
+  ],
+  "check": "Q: An asset has arithmetic mean 10 percent and volatility 40 percent. What is its approximate geometric growth rate? A: 10 minus 8 equals about 2 percent.",
+  "aliases": [
+   "volatility tax"
+  ]
+ },
+ {
+  "title": "Arithmetic versus geometric mean return",
+  "domain": "Quant",
+  "one_line": "The mean of terminal wealth grows at the arithmetic rate while the median grows at the geometric rate, so a positive expected return can sit on top of a typical path that loses money.",
+  "depends_on": [
+   "Volatility drag"
+  ],
+  "sources": [
+   "EQI ch.2 §2.1.3",
+   "The Anatomy of a Return (https://claude.ai/code/artifact/7167b6ba-321d-41f4-803d-a132a611922d)",
+   "The Coordinates of a Return (https://claude.ai/code/artifact/ef6ce45a-28c7-4b01-b1ab-b3431532bf22)"
+  ],
+  "check": "Q: A coin multiplies wealth by 1.5 or 0.6. After 100 flips what are mean and median wealth? A: 131 times and 0.0052 times, with 86.4 percent of players ending below where they started."
+ },
+ {
+  "title": "Utility function",
+  "domain": "Quant",
+  "one_line": "A utility function is an invented ruler converting one number, the portfolio return, into a score, and only its shape matters because any positive affine rescaling leaves every decision unchanged.",
+  "depends_on": [
+   "Random variable"
+  ],
+  "sources": [
+   "EQI ch.3 §3.2",
+   "Four Numbers and What They Threw Away (https://claude.ai/code/artifact/0b20a92e-dc03-4b4c-aa3e-0a8a0c320608)",
+   "The Second Moment (https://claude.ai/code/artifact/f752817b-76e9-4098-af91-44dde50e19de)"
+  ],
+  "check": "Q: What does u actually take as its argument in max E[u(w transpose R)]? A: The single scalar w transpose R, the portfolio's return; it never sees the weights or the individual stocks."
+ },
+ {
+  "title": "Concavity is risk aversion",
+  "domain": "Quant",
+  "one_line": "A concave utility means each extra gain is worth less than the last, so losing five percent costs more than winning five percent gains, and that asymmetry is risk aversion restated.",
+  "depends_on": [
+   "Utility function",
+   "Convexity and concavity"
+  ],
+  "sources": [
+   "EQI ch.3 §3.2",
+   "The Second Moment (https://claude.ai/code/artifact/f752817b-76e9-4098-af91-44dde50e19de)",
+   "Four Numbers and What They Threw Away (https://claude.ai/code/artifact/0b20a92e-dc03-4b4c-aa3e-0a8a0c320608)"
+  ],
+  "check": "Q: On u = sqrt(1+r) at zero, compare the gain from plus 5 percent with the loss from minus 5 percent. A: 0.02470 gained against 0.02532 lost, so the loss is larger."
+ },
+ {
+  "title": "Certainty equivalent",
+  "domain": "Quant",
+  "one_line": "The certainty equivalent is the guaranteed amount that scores the same as a gamble, and it sits below the gamble's mean for any concave utility by Jensen's inequality.",
+  "depends_on": [
+   "Utility function",
+   "Jensen's inequality"
+  ],
+  "sources": [
+   "The Second Moment (https://claude.ai/code/artifact/f752817b-76e9-4098-af91-44dde50e19de)",
+   "Four Numbers and What They Threw Away (https://claude.ai/code/artifact/0b20a92e-dc03-4b4c-aa3e-0a8a0c320608)"
+  ],
+  "check": "Q: A coin flip between 0 and 200 dollars scored on sqrt(money) has what certainty equivalent? A: Fifty dollars, so this person swaps a fair flip on 100 dollars for 50 in cash."
+ },
+ {
+  "title": "Risk premium",
+  "domain": "Quant",
+  "one_line": "The risk premium is the gamble's mean minus its certainty equivalent, the money handed over to make uncertainty go away, and it is the Jensen gap read along the horizontal axis instead of the vertical one.",
+  "depends_on": [
+   "Certainty equivalent"
+  ],
+  "sources": [
+   "The Second Moment (https://claude.ai/code/artifact/f752817b-76e9-4098-af91-44dde50e19de)",
+   "Four Numbers and What They Threw Away (https://claude.ai/code/artifact/0b20a92e-dc03-4b4c-aa3e-0a8a0c320608)"
+  ],
+  "check": "Q: For small gambles what is the closed form of the risk premium? A: About half the Arrow-Pratt coefficient times the variance, which contains no skewness or kurtosis at all."
+ },
+ {
+  "title": "Arrow-Pratt absolute risk aversion",
+  "domain": "Quant",
+  "one_line": "The Arrow-Pratt coefficient is minus the second derivative over the first derivative of utility, and it multiplies half the variance to give the risk premium of a small gamble.",
+  "depends_on": [
+   "Risk premium",
+   "Taylor expansion"
+  ],
+  "sources": [
+   "The Second Moment (https://claude.ai/code/artifact/f752817b-76e9-4098-af91-44dde50e19de)"
+  ],
+  "check": "Q: Which 1964 paper derived this, and which one is usually misattributed? A: Pratt 1964 derived it, independently with Arrow; Sharpe 1964 is CAPM and Markowitz proposed mean variance in 1952."
+ },
+ {
+  "title": "Relative risk aversion",
+  "domain": "Quant",
+  "one_line": "Relative risk aversion is wealth times absolute risk aversion, and it governs what fraction of wealth is put at risk rather than how many dollars.",
+  "depends_on": [
+   "Arrow-Pratt absolute risk aversion"
+  ],
+  "sources": [
+   "Four Numbers and What They Threw Away (https://claude.ai/code/artifact/0b20a92e-dc03-4b4c-aa3e-0a8a0c320608)"
+  ],
+  "check": "Q: Which quantity is constant for log utility, and what does that predict? A: Relative risk aversion, so the investor risks the same percentage of wealth at any size."
+ },
+ {
+  "title": "CARA CRRA and log utility",
+  "domain": "Quant",
+  "one_line": "The three utility families named in the chapter differ only in which measure of risk aversion is constant, and therefore in how they treat ruin rather than in how they look near today's wealth.",
+  "depends_on": [
+   "Relative risk aversion"
+  ],
+  "sources": [
+   "EQI ch.3 §3.2",
+   "Four Numbers and What They Threw Away (https://claude.ai/code/artifact/0b20a92e-dc03-4b4c-aa3e-0a8a0c320608)"
+  ],
+  "check": "Q: Which of the three refuses any positive probability of ruin at any price, and why? A: Log utility, because it falls to minus infinity at zero wealth while CARA stays finite there."
+ },
+ {
+  "title": "Mean-variance is a truncated expansion",
+  "domain": "Quant",
+  "one_line": "Cutting the Taylor expansion of expected utility after the quadratic term produces mean minus a multiple of variance, so mean variance optimisation is forced by the truncation rather than chosen as a convention.",
+  "depends_on": [
+   "Utility function",
+   "Taylor expansion",
+   "Variance"
+  ],
+  "sources": [
+   "EQI ch.3 §3.2 assumption 1",
+   "The Second Moment (https://claude.ai/code/artifact/f752817b-76e9-4098-af91-44dde50e19de)",
+   "Four Numbers and What They Threw Away (https://claude.ai/code/artifact/0b20a92e-dc03-4b4c-aa3e-0a8a0c320608)"
+  ],
+  "check": "Q: Why is the risk term a variance and not a standard deviation? A: A second order expansion produces a squared deviation and nothing else, so the form is forced."
+ },
+ {
+  "title": "The skewness blind spot",
+  "domain": "Quant",
+  "one_line": "Truncating after the second moment deletes the third derivative term, so every object downstream is blind to skewness by construction rather than by approximation error.",
+  "depends_on": [
+   "Mean-variance is a truncated expansion",
+   "Skewness"
+  ],
+  "sources": [
+   "The Second Moment (https://claude.ai/code/artifact/f752817b-76e9-4098-af91-44dde50e19de)"
+  ],
+  "check": "Q: Three books share mean 8 percent, volatility 15 percent and Sharpe 0.533. What separates their worst one percent of years? A: Minus 6.92 percent against minus 61.21 percent, a factor of 8.8 that no second moment metric can see."
+ },
+ {
+  "title": "Risk aversion parameter lambda",
+  "domain": "Quant",
+  "one_line": "The lambda in an optimizer objective is the book's b over a ratio doubled, so it is the curvature of a utility function, and it changes only the size of the book and never its direction.",
+  "depends_on": [
+   "Mean-variance is a truncated expansion",
+   "Arrow-Pratt absolute risk aversion"
+  ],
+  "sources": [
+   "The Second Moment (https://claude.ai/code/artifact/f752817b-76e9-4098-af91-44dde50e19de)",
+   "Four Numbers and What They Threw Away (https://claude.ai/code/artifact/0b20a92e-dc03-4b4c-aa3e-0a8a0c320608)"
+  ],
+  "check": "Q: Solve max E[r] minus lambda over 2 times Var(r) with no constraints. What is w? A: One over lambda times Sigma inverse alpha, so lambda divides every weight and cannot rotate the portfolio."
+ },
+ {
+  "title": "Volatility as a risk measure",
+  "domain": "Quant",
+  "one_line": "Volatility is defended not as the right description of risk but as the highest moment that can actually be estimated, since with a tail index between two and five nothing above the second is reliable.",
+  "depends_on": [
+   "Variance",
+   "Existence of a moment"
+  ],
+  "sources": [
+   "EQI ch.3 §3.2",
+   "Four Numbers and What They Threw Away (https://claude.ai/code/artifact/0b20a92e-dc03-4b4c-aa3e-0a8a0c320608)",
+   "The Second Moment (https://claude.ai/code/artifact/f752817b-76e9-4098-af91-44dde50e19de)"
+  ],
+  "check": "Q: State the two thresholds the footnote separates. A: A tail index above 2 to have a variance, and above 4 to estimate it consistently; existence and estimability are different questions."
+ },
+ {
+  "title": "Expected return of a strategy",
+  "domain": "Quant",
+  "one_line": "Expected return is profit divided by assets under management, a division that buys comparability across periods because it is stationary and across funds because it is intensive.",
+  "depends_on": [
+   "Simple return"
+  ],
+  "sources": [
+   "EQI ch.3 §3.1",
+   "Four Numbers and What They Threw Away (https://claude.ai/code/artifact/0b20a92e-dc03-4b4c-aa3e-0a8a0c320608)"
+  ],
+  "check": "Q: Which word buys comparability across time and which across size? A: Stationary across time and intensive across size; dollar profit fails both at once."
+ },
+ {
+  "title": "Sharpe ratio",
+  "domain": "Quant",
+  "one_line": "The Sharpe ratio divides expected excess return by volatility over the same horizon, collapsing the risk return plane into a single scalar an optimizer can climb, geometrically the slope of a ray through the origin.",
+  "depends_on": [
+   "Expected return of a strategy",
+   "Volatility as a risk measure",
+   "Excess return"
+  ],
+  "sources": [
+   "EQI ch.3 §3.3",
+   "Four Numbers and What They Threw Away (https://claude.ai/code/artifact/0b20a92e-dc03-4b4c-aa3e-0a8a0c320608)",
+   "The Second Moment (https://claude.ai/code/artifact/f752817b-76e9-4098-af91-44dde50e19de)"
+  ],
+  "check": "Q: What does a slope through the origin structurally fail to see? A: How far along the ray you are, which is the entire hole that capacity exists to fill."
+ },
+ {
+  "title": "Sharpe ratio as a t-statistic",
+  "domain": "Quant",
+  "one_line": "Under iid returns the per period Sharpe ratio times the square root of the number of periods is exactly the t-statistic on the claim that the strategy makes money.",
+  "depends_on": [
+   "Sharpe ratio",
+   "t-statistic"
+  ],
+  "sources": [
+   "EQI ch.3 §3.3",
+   "Four Numbers and What They Threw Away (https://claude.ai/code/artifact/0b20a92e-dc03-4b4c-aa3e-0a8a0c320608)"
+  ],
+  "check": "Q: How long must a true annual Sharpe of 1.0 run to clear a t of 1.96? A: 3.8 years; at 0.5 it takes 15.4 years and at 0.3 about forty three."
+ },
+ {
+  "title": "Dimension of the Sharpe ratio",
+  "domain": "Quant",
+  "one_line": "Return scales with the horizon and volatility with its square root, so the Sharpe ratio carries dimension one over the square root of time and is not a pure number.",
+  "depends_on": [
+   "Sharpe ratio",
+   "Square root of time scaling"
+  ],
+  "sources": [
+   "EQI ch.3 FAQ 3.1",
+   "Four Numbers and What They Threw Away (https://claude.ai/code/artifact/0b20a92e-dc03-4b4c-aa3e-0a8a0c320608)"
+  ],
+  "check": "Q: One strategy is honestly 0.055 daily. What is it annually? A: 0.055 times the square root of 251, about 0.864, and neither figure is more true than the other."
+ },
+ {
+  "title": "Standard error of the Sharpe ratio",
+  "domain": "Quant",
+  "one_line": "The standard error of an estimated Sharpe ratio is the root of one plus half its square, over T, so the extra term is the price of estimating the volatility too.",
+  "depends_on": [
+   "Sharpe ratio",
+   "Standard error of a sample mean"
+  ],
+  "sources": [
+   "EQI ch.3 FAQ 3.2",
+   "Four Numbers and What They Threw Away (https://claude.ai/code/artifact/0b20a92e-dc03-4b4c-aa3e-0a8a0c320608)"
+  ],
+  "check": "Q: What multiplier does estimating the volatility from the same sample cost at SR 3? A: 2.35 times, against 1.22 times at SR 1, so excellence is harder to measure than mediocrity."
+ },
+ {
+  "title": "Autocorrelation inflation of the Sharpe ratio",
+  "domain": "Quant",
+  "one_line": "Positive autocorrelation makes the variance of a sum exceed the sum of variances, so naive annualisation divides by too small a volatility and overstates the Sharpe ratio.",
+  "depends_on": [
+   "Sharpe ratio",
+   "Autocorrelation function"
+  ],
+  "sources": [
+   "EQI ch.3 FAQ 3.2",
+   "Four Numbers and What They Threw Away (https://claude.ai/code/artifact/0b20a92e-dc03-4b4c-aa3e-0a8a0c320608)"
+  ],
+  "check": "Q: A fund reports Sharpe 2.78 with lag one autocorrelation 0.80 on a strategy whose true ratio is 0.90. What is the diagnosis? A: Smoothed marks; the fund is reporting one number twice."
+ },
+ {
+  "title": "Sharpe ratio sign inversion",
+  "domain": "Quant",
+  "one_line": "Below zero the same division that penalises risk rewards it, so among losing strategies the Sharpe ratio prefers the one that took twice the risk to lose the same amount.",
+  "depends_on": [
+   "Sharpe ratio"
+  ],
+  "sources": [
+   "EQI ch.3 §3.3",
+   "Four Numbers and What They Threw Away (https://claude.ai/code/artifact/0b20a92e-dc03-4b4c-aa3e-0a8a0c320608)",
+   "The Second Moment (https://claude.ai/code/artifact/f752817b-76e9-4098-af91-44dde50e19de)"
+  ],
+  "check": "Q: Compare minus 5 percent at 5 percent volatility with minus 5 percent at 10 percent. A: minus 1.00 against minus 0.50, and the riskier book scores higher."
+ },
+ {
+  "title": "Information ratio",
+  "domain": "Quant",
+  "one_line": "The information ratio is the Sharpe ratio computed on idiosyncratic returns alone, so it scores stock selection after the factor component that any index fund would also have earned is removed.",
+  "depends_on": [
+   "Sharpe ratio",
+   "Idiosyncratic returns"
+  ],
+  "sources": [
+   "EQI ch.3 §3.3",
+   "Four Numbers and What They Threw Away (https://claude.ai/code/artifact/0b20a92e-dc03-4b4c-aa3e-0a8a0c320608)",
+   "The Second Moment (https://claude.ai/code/artifact/f752817b-76e9-4098-af91-44dde50e19de)"
+  ],
+  "check": "Q: A book with beta 1.15 scored Sharpe 0.49 on total return. What did it score on the idiosyncratic part? A: An information ratio of 3.04, six times higher, from the same trader and the same year."
+ },
+ {
+  "title": "Capacity",
+  "domain": "Quant",
+  "one_line": "Capacity is the largest expected profit a strategy can produce subject to a floor on its Sharpe ratio, and it exists as a separate metric because the Sharpe ratio falls as size grows.",
+  "depends_on": [
+   "Sharpe ratio",
+   "Market impact"
+  ],
+  "sources": [
+   "EQI ch.3 §3.4",
+   "Four Numbers and What They Threw Away (https://claude.ai/code/artifact/0b20a92e-dc03-4b4c-aa3e-0a8a0c320608)"
+  ],
+  "check": "Q: Why does capacity change with the floor you set? A: The same strategy peaks at 194 million dollars unconstrained and 177 million at a Sharpe floor of 1.0, so a capacity quoted without its floor is empty."
+ },
+ {
+  "title": "Value at risk and conditional value at risk",
+  "domain": "Quant",
+  "one_line": "Value at risk is the loss exceeded with a given small probability and conditional value at risk is the average loss beyond it, so the second reads the shape of the tail rather than a single point on it.",
+  "depends_on": [
+   "Random variable",
+   "Volatility as a risk measure"
+  ],
+  "sources": [
+   "Four Numbers and What They Threw Away (https://claude.ai/code/artifact/0b20a92e-dc03-4b4c-aa3e-0a8a0c320608)"
+  ],
+  "check": "Q: Three books share mean, volatility and Sharpe ratio. What did their 95 percent CVaR run from? A: 14.6 percent to 21.5 percent, so the skewed book is 47 percent worse in the tail at an identical score."
+ },
+ {
+  "title": "Geometric Brownian motion",
+  "domain": "Quant",
+  "one_line": "Geometric Brownian motion assumes constant volatility, Gaussian log returns and independent increments, and it is contradicted by every one of the four stylized facts, so it is a pricing model and never a risk model.",
+  "depends_on": [
+   "Gaussian distribution",
+   "Log return"
+  ],
+  "sources": [
+   "EQI ch.2 eq (2.3)",
+   "The Coordinates of a Return (https://claude.ai/code/artifact/ef6ce45a-28c7-4b01-b1ab-b3431532bf22)",
+   "The Anatomy of a Return (https://claude.ai/code/artifact/7167b6ba-321d-41f4-803d-a132a611922d)"
+  ],
+  "check": "Q: Why does the wrong model survive? A: It is the unique process under which continuous delta hedging is exact, so it is constitutive for derivative pricing while being void for risk."
+ },
+ {
+  "title": "GARCH(1,1)",
+  "domain": "Quant",
+  "one_line": "GARCH makes conditional variance a state with its own recursion, alpha times yesterday's squared return plus beta times yesterday's variance plus a constant, so it has no memory in the sign and long memory in the size.",
+  "depends_on": [
+   "Variance",
+   "Uncorrelated is not independent",
+   "Stationarity"
+  ],
+  "sources": [
+   "EQI ch.2 §2.2, eq (2.7) to (2.9)",
+   "Three Roads to One Hidden Number (https://claude.ai/code/artifact/7933d34c-7c45-4c12-9671-be94ddc9d9a7)",
+   "The Anatomy of a Return (https://claude.ai/code/artifact/7167b6ba-321d-41f4-803d-a132a611922d)",
+   "The Coordinates of a Return (https://claude.ai/code/artifact/ef6ce45a-28c7-4b01-b1ab-b3431532bf22)"
+  ],
+  "check": "Q: Which stylized fact does GARCH(1,1) with Gaussian innovations fail outright? A: Aggregational Gaussianity: aggregated GARCH is GARCH, still at kurtosis 6.51 at monthly frequency against 3.09 for an independent series."
+ },
+ {
+  "title": "Persistence and half-life",
+  "domain": "Quant",
+  "one_line": "The sum of the GARCH reactivity and memory parameters is the persistence, and it alone sets the decay rate, so the half-life is the number worth arguing about rather than the parameters.",
+  "depends_on": [
+   "GARCH(1,1)",
+   "Exponentially weighted moving average"
+  ],
+  "sources": [
+   "EQI ch.2 §2.2",
+   "Three Roads to One Hidden Number (https://claude.ai/code/artifact/7933d34c-7c45-4c12-9671-be94ddc9d9a7)"
+  ],
+  "check": "Q: Half-lives at persistence 0.97, 0.99 and 0.995? A: 23, 69 and 138 days, so a change in the third decimal doubles your risk model's memory."
+ },
+ {
+  "title": "IGARCH",
+  "domain": "Quant",
+  "one_line": "Setting the offset to zero and forcing the two parameters to sum to one makes GARCH identical to an EWMA, a process with no long run variance whose multi day forecast is flat forever.",
+  "depends_on": [
+   "Persistence and half-life"
+  ],
+  "sources": [
+   "EQI ch.2 Insight 2.2",
+   "Three Roads to One Hidden Number (https://claude.ai/code/artifact/7933d34c-7c45-4c12-9671-be94ddc9d9a7)"
+  ],
+  "check": "Q: Told that volatility is 3 percent today, what do GARCH and EWMA forecast a quarter ahead? A: GARCH decays to 1.85 percent and EWMA stays at 3 percent, because a random walk's best forecast is its current value."
+ },
+ {
+  "title": "Realized volatility",
+  "domain": "Quant",
+  "one_line": "Realized volatility measures variance arithmetically from intraday squared returns instead of modelling it, and its relative error falls like the square root of two over the number of samples.",
+  "depends_on": [
+   "Variance",
+   "Law of large numbers"
+  ],
+  "sources": [
+   "EQI ch.2 §2.2.4",
+   "Three Roads to One Hidden Number (https://claude.ai/code/artifact/7933d34c-7c45-4c12-9671-be94ddc9d9a7)",
+   "Evaluating Risk (https://claude.ai/code/artifact/b5aa3c86-7448-44e1-83ee-911457ecc245)"
+  ],
+  "check": "Q: Subdividing the day drives which standard error to zero and which not at all? A: The variance error falls like one over the root of n while the drift error is exactly flat, which is a theorem rather than a sample size problem."
+ },
+ {
+  "title": "Roll model",
+  "domain": "Quant",
+  "one_line": "The Roll model writes the printed price as a latent random walk efficient price plus transient microstructure noise, which manufactures a negative autocorrelation of exactly minus the noise variance at lag one and zero beyond.",
+  "depends_on": [
+   "State-space model",
+   "Bid and ask"
+  ],
+  "sources": [
+   "EQI ch.2 §2.1.4",
+   "The Coordinates of a Return (https://claude.ai/code/artifact/ef6ce45a-28c7-4b01-b1ab-b3431532bf22)",
+   "The Anatomy of a Return (https://claude.ai/code/artifact/7167b6ba-321d-41f4-803d-a132a611922d)"
+  ],
+  "check": "Q: What can you recover from closing prices alone under the Roll model? A: The effective spread, as twice the square root of minus the lag one autocovariance, with no order book data."
+ },
+ {
+  "title": "Volatility signature plot",
+  "domain": "Quant",
+  "one_line": "Because microstructure noise adds a constant per observation, realized variance grows linearly in the sampling frequency, so sampling faster eventually measures the spread rather than the volatility.",
+  "depends_on": [
+   "Realized volatility",
+   "Roll model"
+  ],
+  "sources": [
+   "EQI ch.2 §2.1.4, §2.2.4",
+   "The Coordinates of a Return (https://claude.ai/code/artifact/ef6ce45a-28c7-4b01-b1ab-b3431532bf22)",
+   "Three Roads to One Hidden Number (https://claude.ai/code/artifact/7933d34c-7c45-4c12-9671-be94ddc9d9a7)"
+  ],
+  "check": "Q: Why is five minute sampling the industry convention? A: It is the elbow of the signature curve, slow enough that the noise term is small and fast enough to beat down sampling error."
+ },
+ {
+  "title": "Harvey-Shephard model",
+  "domain": "Quant",
+  "one_line": "Taking logs of squared returns turns a genuinely stochastic volatility model into a linear Gaussian state-space model with positivity for free, at the price of an observation noise of standard deviation 2.22 in log units.",
+  "depends_on": [
+   "State-space model",
+   "Log return",
+   "Chi-squared distribution"
+  ],
+  "sources": [
+   "EQI ch.2 §2.3.2",
+   "Three Roads to One Hidden Number (https://claude.ai/code/artifact/7933d34c-7c45-4c12-9671-be94ddc9d9a7)"
+  ],
+  "check": "Q: How large is the observation noise relative to the signal? A: The noise standard deviation of 2.22 log units exceeds the roughly 1.5 log unit range of equity log variance over a whole cycle."
+ },
+ {
+  "title": "Factor model",
+  "domain": "Quant",
+  "one_line": "The factor model writes the cross-section of returns as alpha plus a loadings matrix times a short vector of factor returns plus idiosyncratic noise, which is first a parameter counting argument and only second a story about markets.",
+  "depends_on": [
+   "Vector",
+   "Matrix as a linear map",
+   "Simple return"
+  ],
+  "sources": [
+   "EQI ch.4 §4.1, eq (4.1)",
+   "Linear Models of Returns (https://claude.ai/code/artifact/95edfc2a-c498-44a6-b8ab-08b05a4ec5a8)",
+   "Statistical Factor Models (https://claude.ai/code/artifact/3b8a1936-8d6c-419e-9060-0420a9bdd8ae)"
+  ],
+  "check": "Q: Name the three assumptions on the residual and which one is known to be false. A: Independent of the factors, zero mean, and diagonal covariance; the third is false in practice and is patched by push-outs."
+ },
+ {
+  "title": "Parameter counting argument",
+  "domain": "Quant",
+  "one_line": "An unrestricted covariance needs n(n+1)/2 numbers which grows quadratically, while a factor structure needs nm plus m(m+1)/2 plus n which grows linearly, so the data per parameter never catches up.",
+  "depends_on": [
+   "Factor model",
+   "Covariance"
+  ],
+  "sources": [
+   "EQI ch.4 §4.1",
+   "Linear Models of Returns (https://claude.ai/code/artifact/95edfc2a-c498-44a6-b8ab-08b05a4ec5a8)",
+   "Statistical Factor Models (https://claude.ai/code/artifact/3b8a1936-8d6c-419e-9060-0420a9bdd8ae)"
+  ],
+  "check": "Q: At 3000 stocks and ten years of daily data, how many observations per parameter does each approach give? A: 1.67 unrestricted against 40.6 with sixty factors."
+ },
+ {
+  "title": "Loadings matrix",
+  "domain": "Quant",
+  "one_line": "The loadings matrix is a tall thin store of how much each factor transfers into each asset, and its blocks are typically a market intercept column, country and industry dummies, and continuous style columns.",
+  "depends_on": [
+   "Factor model",
+   "Column space"
+  ],
+  "sources": [
+   "EQI ch.4 §4.1",
+   "Linear Models of Returns (https://claude.ai/code/artifact/95edfc2a-c498-44a6-b8ab-08b05a4ec5a8)",
+   "Fundamental Factor Models (https://claude.ai/code/artifact/ffbcd609-5980-4991-a3d5-21c17e9b5e41)"
+  ],
+  "check": "Q: Read a row of B and read a column. What is each? A: A row is one stock's complete description, a column is one factor's footprint across the whole market."
+ },
+ {
+  "title": "Factor returns",
+  "domain": "Quant",
+  "one_line": "Factor returns are the short vector of per period returns to each factor, unobservable and inferred, and they are what a fundamental model produces afresh from one regression on every single date.",
+  "depends_on": [
+   "Factor model"
+  ],
+  "sources": [
+   "EQI ch.6 §6.2",
+   "Fundamental Factor Models (https://claude.ai/code/artifact/ffbcd609-5980-4991-a3d5-21c17e9b5e41)",
+   "Linear Models of Returns (https://claude.ai/code/artifact/95edfc2a-c498-44a6-b8ab-08b05a4ec5a8)"
+  ],
+  "check": "Q: Which of loadings and factor returns can you look up? A: The loadings; nobody publishes the return to value on Tuesday, so it has to be inferred."
+ },
+ {
+  "title": "Idiosyncratic returns",
+  "domain": "Quant",
+  "one_line": "Idiosyncratic returns are what the factors did not account for, readable positively as asset specific news and negatively as a residue whose content changes whenever you add a factor.",
+  "depends_on": [
+   "Factor model",
+   "Orthogonal complement"
+  ],
+  "sources": [
+   "EQI ch.4 §4.1",
+   "Linear Models of Returns (https://claude.ai/code/artifact/95edfc2a-c498-44a6-b8ab-08b05a4ec5a8)"
+  ],
+  "check": "Q: Give the two readings and say why the difference matters. A: A real economic object versus a leftover defined by subtraction; the second reading is why adding a factor silently changes what epsilon is.",
+  "aliases": [
+   "specific returns",
+   "residual returns"
+  ]
+ },
+ {
+  "title": "Factor covariance identity",
+  "domain": "Quant",
+  "one_line": "The return covariance equals B times the factor covariance times B transpose plus the idiosyncratic covariance, an exact identity in which alpha does not appear at all.",
+  "depends_on": [
+   "Factor model",
+   "Covariance"
+  ],
+  "sources": [
+   "EQI ch.4 §4.1, eq (4.2), FAQ 4.1",
+   "Linear Models of Returns (https://claude.ai/code/artifact/95edfc2a-c498-44a6-b8ab-08b05a4ec5a8)",
+   "Evaluating Risk (https://claude.ai/code/artifact/b5aa3c86-7448-44e1-83ee-911457ecc245)"
+  ],
+  "check": "Q: Why is alpha invisible to the risk model? A: Covariance ignores constants, so shifting returns by a fixed vector does not change how they vary."
+ },
+ {
+  "title": "Alpha spanned",
+  "domain": "Quant",
+  "one_line": "The component of alpha lying in the column space of the loadings is indistinguishable from factor expected returns, because a constant added to every period's factor return produces identical data.",
+  "depends_on": [
+   "Factor model",
+   "Column space"
+  ],
+  "sources": [
+   "EQI ch.4 §4.3",
+   "Linear Models of Returns (https://claude.ai/code/artifact/95edfc2a-c498-44a6-b8ab-08b05a4ec5a8)",
+   "The Alpha Split (https://claude.ai/code/artifact/703f2e90-07d6-414f-81fa-5d02d0e38fed)"
+  ],
+  "check": "Q: A researcher claims alpha in a direction the firm's risk model already spans. What are they claiming? A: A factor premium, definitionally, whatever the backtest says."
+ },
+ {
+  "title": "Alpha orthogonal",
+  "domain": "Quant",
+  "one_line": "The component of alpha perpendicular to every loading column defines a portfolio whose factor exposure is annihilated exactly, so it earns the length of that vector with only idiosyncratic risk left.",
+  "depends_on": [
+   "Factor model",
+   "Orthogonal complement"
+  ],
+  "sources": [
+   "EQI ch.4 §4.3",
+   "Linear Models of Returns (https://claude.ai/code/artifact/95edfc2a-c498-44a6-b8ab-08b05a4ec5a8)",
+   "The Alpha Split (https://claude.ai/code/artifact/703f2e90-07d6-414f-81fa-5d02d0e38fed)"
+  ],
+  "check": "Q: A unit portfolio along alpha orthogonal has what mean and what factor exposure? A: Mean equal to the norm of alpha orthogonal, and factor exposure exactly zero on every day and every realisation."
+ },
+ {
+  "title": "Root n Sharpe bound",
+  "domain": "Quant",
+  "one_line": "Bounding the variance by the operator norm and the length by the one norm inequality gives a Sharpe ratio of at least the root of n times the per asset edge.",
+  "depends_on": [
+   "Alpha orthogonal",
+   "One norm versus two norm inequality",
+   "Rayleigh quotient"
+  ],
+  "sources": [
+   "EQI ch.4 §4.3, eq (4.3)",
+   "The Alpha Split (https://claude.ai/code/artifact/703f2e90-07d6-414f-81fa-5d02d0e38fed)",
+   "Linear Models of Returns (https://claude.ai/code/artifact/95edfc2a-c498-44a6-b8ab-08b05a4ec5a8)"
+  ],
+  "check": "Q: With a 1.2 basis point daily per asset edge and 40 percent maximum idiosyncratic volatility, what floor does the bound give at 10,000 names? A: An annualised Sharpe of 7.56, which no fund attains, so the per asset edge must decay."
+ },
+ {
+  "title": "Rotational indeterminacy",
+  "domain": "Quant",
+  "one_line": "Replacing B by B C inverse and f by C f leaves every prediction unchanged for any invertible C, so a factor model identifies a subspace and never a particular basis.",
+  "depends_on": [
+   "Factor model",
+   "Basis change"
+  ],
+  "sources": [
+   "EQI ch.4 §4.4.1",
+   "Linear Models of Returns (https://claude.ai/code/artifact/95edfc2a-c498-44a6-b8ab-08b05a4ec5a8)",
+   "Statistical Factor Models (https://claude.ai/code/artifact/3b8a1936-8d6c-419e-9060-0420a9bdd8ae)"
+  ],
+  "check": "Q: What is invariant under a rotation and what is not? A: Total factor variance and every prediction are invariant; per factor exposures and per factor risk shares are not."
+ },
+ {
+  "title": "Identity factor covariance rotation",
+  "domain": "Quant",
+  "one_line": "Taking C from the SVD of the factor covariance makes the rotated factor covariance the identity, so portfolio factor variance becomes a plain sum of squared exposures with no cross terms.",
+  "depends_on": [
+   "Rotational indeterminacy",
+   "Singular value decomposition"
+  ],
+  "sources": [
+   "EQI ch.4 §4.4.1",
+   "Linear Models of Returns (https://claude.ai/code/artifact/95edfc2a-c498-44a6-b8ab-08b05a4ec5a8)",
+   "The Alpha Split (https://claude.ai/code/artifact/703f2e90-07d6-414f-81fa-5d02d0e38fed)"
+  ],
+  "check": "Q: What does this rotation buy the risk manager? A: Exposures read directly as factor volatilities and risk becomes Pythagoras rather than a quadratic form full of covariances."
+ },
+ {
+  "title": "Orthonormal loadings rotation",
+  "domain": "Quant",
+  "one_line": "Taking C from the SVD of the loadings makes B transpose B the identity, so the projection collapses to B B transpose and fitting factor returns needs no inverse at all.",
+  "depends_on": [
+   "Rotational indeterminacy",
+   "Singular value decomposition"
+  ],
+  "sources": [
+   "EQI ch.4 §4.4.1",
+   "Linear Models of Returns (https://claude.ai/code/artifact/95edfc2a-c498-44a6-b8ab-08b05a4ec5a8)",
+   "The Alpha Split (https://claude.ai/code/artifact/703f2e90-07d6-414f-81fa-5d02d0e38fed)"
+  ],
+  "check": "Q: Can you have both an identity factor covariance and orthonormal loadings? A: No; twelve symmetric conditions on nine free numbers, and after the first rotation the eigenvalues of B transpose B are not all one."
+ },
+ {
+  "title": "Centring factor loadings",
+  "domain": "Quant",
+  "one_line": "Scaling loadings is always a rotation but centring them is a shift, so it is only possible when the all ones vector lies in the column space, and then not on the very columns that build it.",
+  "depends_on": [
+   "Rotational indeterminacy",
+   "Column space",
+   "Matrix determinant lemma"
+  ],
+  "sources": [
+   "EQI ch.4 §4.4.1, eq (4.4), Exercises 4.4 and 4.5",
+   "The Alpha Split (https://claude.ai/code/artifact/703f2e90-07d6-414f-81fa-5d02d0e38fed)",
+   "Linear Models of Returns (https://claude.ai/code/artifact/95edfc2a-c498-44a6-b8ab-08b05a4ec5a8)"
+  ],
+  "check": "Q: Why does centring every column make the rotation singular? A: The shift on the columns building the ones vector is exactly their own mean, so nu transpose a equals minus one and the determinant is zero."
+ },
+ {
+  "title": "Factor model projection",
+  "domain": "Quant",
+  "one_line": "A projection replaces the loadings by a matrix whose range sits inside the original, choosing the factor returns that minimise the squared distance between the two systematic returns.",
+  "depends_on": [
+   "Loadings matrix",
+   "Projection onto a subspace"
+  ],
+  "sources": [
+   "EQI ch.4 §4.4.2, FAQ 4.3",
+   "Linear Models of Returns (https://claude.ai/code/artifact/95edfc2a-c498-44a6-b8ab-08b05a4ec5a8)"
+  ],
+  "check": "Q: Does a projected model necessarily report less risk than its parent? A: No; on the worked example factor variance rose 0.12 percent, because the criterion is pathwise closeness rather than portfolio variance."
+ },
+ {
+  "title": "Push-out",
+  "domain": "Quant",
+  "one_line": "A push-out promotes structure out of the residual into new factors, and the new loadings must be orthogonal to the old ones or every original factor silently changes meaning.",
+  "depends_on": [
+   "Loadings matrix",
+   "Orthogonality",
+   "Idiosyncratic returns"
+  ],
+  "sources": [
+   "EQI ch.4 §4.4.3, eq (4.5)",
+   "Linear Models of Returns (https://claude.ai/code/artifact/95edfc2a-c498-44a6-b8ab-08b05a4ec5a8)"
+  ],
+  "check": "Q: What happens if you add a non orthogonal factor? A: Returns stay identical to 6.9e-18 while the market factor's reported daily return moves by 38 basis points, purely from re dividing credit."
+ },
+ {
+  "title": "Performance attribution",
+  "domain": "Quant",
+  "one_line": "Portfolio profit splits exactly into exposures times factor returns plus weights times idiosyncratic returns, and the same double sum can be regrouped by factor or by stock without changing the total.",
+  "depends_on": [
+   "Factor model",
+   "Dollar weights"
+  ],
+  "sources": [
+   "EQI ch.4 §4.5.1",
+   "Linear Models of Returns (https://claude.ai/code/artifact/95edfc2a-c498-44a6-b8ab-08b05a4ec5a8)"
+  ],
+  "check": "Q: A twelve name book lost 188,151 dollars in a day. How did it split? A: minus 169,511 to factors and minus 18,640 idiosyncratic, so a good stock picker still had that day."
+ },
+ {
+  "title": "Factor exposures of a portfolio",
+  "domain": "Quant",
+  "one_line": "The exposure vector b equals B transpose w, which turns n positions meeting n returns into m exposures meeting m factor returns, and it is an automatic consequence of holding the names.",
+  "depends_on": [
+   "Dollar weights",
+   "Loadings matrix"
+  ],
+  "sources": [
+   "EQI ch.4 §4.2.3, §4.5.1",
+   "Linear Models of Returns (https://claude.ai/code/artifact/95edfc2a-c498-44a6-b8ab-08b05a4ec5a8)"
+  ],
+  "check": "Q: Why can a long in a low value stock and a short in a high value stock add to the same value exposure? A: Because both the characteristics and the weights can be negative, so their product has one sign."
+ },
+ {
+  "title": "Percentage idiosyncratic variance",
+  "domain": "Quant",
+  "one_line": "Factor variance and idiosyncratic variance add to total variance and their percentages sum to one hundred, but the corresponding volatilities do not add because they are the legs of a right triangle.",
+  "depends_on": [
+   "Factor covariance identity",
+   "Pythagorean decomposition"
+  ],
+  "sources": [
+   "EQI ch.4 §4.5.2",
+   "Linear Models of Returns (https://claude.ai/code/artifact/95edfc2a-c498-44a6-b8ab-08b05a4ec5a8)"
+  ],
+  "check": "Q: Adding factor and idiosyncratic volatility gave 322,726 dollars against a true total of 229,986. By how much does that overstate risk? A: Forty percent."
+ },
+ {
+  "title": "Marginal contribution to risk",
+  "domain": "Quant",
+  "one_line": "The marginal contribution of a group is the change in portfolio volatility per unit of that group's volatility added, and it evaluates exactly to the correlation of the group's profit with the total.",
+  "depends_on": [
+   "Factor exposures of a portfolio",
+   "Correlation"
+  ],
+  "sources": [
+   "EQI ch.4 §4.5.2",
+   "Linear Models of Returns (https://claude.ai/code/artifact/95edfc2a-c498-44a6-b8ab-08b05a4ec5a8)"
+  ],
+  "check": "Q: What free sanity check does that identity hand a risk system? A: Every marginal contribution must lie between minus one and one, because it is a correlation."
+ },
+ {
+  "title": "Share of variance as a beta",
+  "domain": "Quant",
+  "one_line": "A group's share of portfolio variance collapses to the beta of that group's profit against the total profit, which is why the shares sum to one and why a share can legitimately be negative.",
+  "depends_on": [
+   "Factor exposures of a portfolio",
+   "Covariance"
+  ],
+  "sources": [
+   "EQI ch.4 §4.5.2",
+   "Linear Models of Returns (https://claude.ai/code/artifact/95edfc2a-c498-44a6-b8ab-08b05a4ec5a8)"
+  ],
+  "check": "Q: When is a share of variance negative and what does it mean? A: When the group's profit is negatively correlated with the total, so that group is reducing risk."
+ },
+ {
+  "title": "Sharpe sensitivity rule",
+  "domain": "Quant",
+  "one_line": "Adding risk to a group improves total Sharpe exactly when the group's own Sharpe exceeds its marginal contribution to risk times the total Sharpe, so the hurdle rises with how much the group duplicates what you already own.",
+  "depends_on": [
+   "Marginal contribution to risk",
+   "Sharpe ratio"
+  ],
+  "sources": [
+   "EQI ch.4 §4.5.2",
+   "Linear Models of Returns (https://claude.ai/code/artifact/95edfc2a-c498-44a6-b8ab-08b05a4ec5a8)"
+  ],
+  "check": "Q: Value had the highest standalone Sharpe of five groups and still failed. Why? A: Its marginal contribution of 0.892 made it nearly the book itself, so its hurdle of 0.0446 exceeded its 0.0439."
+ },
+ {
+  "title": "Precision matrix",
+  "domain": "Quant",
+  "one_line": "The optimizer consumes the inverse covariance rather than the covariance, and inversion sends every eigenvalue to its reciprocal, so the least reliably estimated small directions dominate the answer.",
+  "depends_on": [
+   "Factor covariance identity",
+   "Condition number"
+  ],
+  "sources": [
+   "EQI ch.5 §5.2",
+   "Evaluating Risk (https://claude.ai/code/artifact/b5aa3c86-7448-44e1-83ee-911457ecc245)",
+   "Grading Our Covariance (https://claude.ai/code/artifact/3fd35969-f7f0-46d6-91ab-ceb3831ed63c)"
+  ],
+  "check": "Q: A ten percent error on the smallest eigenvalue changes the matrix by 0.0005 percent. What does it change the inverse by? A: 3.25 percent, an amplification of about 6150 times."
+ },
+ {
+  "title": "Empirical covariance rank deficiency",
+  "domain": "Quant",
+  "one_line": "With fewer days than assets the sample covariance has a large null space, so a majority of independent portfolios are assigned exactly zero volatility and an optimizer will take unbounded positions in them.",
+  "depends_on": [
+   "Covariance",
+   "Rank of a matrix"
+  ],
+  "sources": [
+   "EQI ch.4 FAQ 4.5",
+   "Linear Models of Returns (https://claude.ai/code/artifact/95edfc2a-c498-44a6-b8ab-08b05a4ec5a8)",
+   "Statistical Factor Models (https://claude.ai/code/artifact/3b8a1936-8d6c-419e-9060-0420a9bdd8ae)"
+  ],
+  "check": "Q: With 200 assets and 60 days, one null space portfolio had estimated variance 4.2e-20. What was its true daily volatility? A: 1.87 percent, and the estimator is equally confident about 139 others."
+ },
+ {
+  "title": "Characteristic factor model",
+  "domain": "Quant",
+  "one_line": "A characteristic model takes returns and firm characteristics as primitives and estimates factor and idiosyncratic returns from them, which is the practitioner default because its factors were named before they were fitted.",
+  "depends_on": [
+   "Factor model",
+   "Loadings matrix"
+  ],
+  "sources": [
+   "EQI ch.4 §4.6, ch.6 §6.1",
+   "Linear Models of Returns (https://claude.ai/code/artifact/95edfc2a-c498-44a6-b8ab-08b05a4ec5a8)",
+   "Fundamental Factor Models (https://claude.ai/code/artifact/ffbcd609-5980-4991-a3d5-21c17e9b5e41)"
+  ],
+  "check": "Q: Which two of the six construction steps does the book decline to give a method for? A: Universe selection and loadings generation, both called art rather than science.",
+  "aliases": [
+   "fundamental factor model"
+  ]
+ },
+ {
+  "title": "Statistical factor model",
+  "domain": "Quant",
+  "one_line": "A statistical model takes only returns as primitive and estimates both loadings and factor returns, so it recovers a subspace rather than a basis and its factors carry no names.",
+  "depends_on": [
+   "Factor model",
+   "Principal component analysis"
+  ],
+  "sources": [
+   "EQI ch.4 §4.6, ch.7 §7.1",
+   "Statistical Factor Models (https://claude.ai/code/artifact/3b8a1936-8d6c-419e-9060-0420a9bdd8ae)",
+   "Linear Models of Returns (https://claude.ai/code/artifact/95edfc2a-c498-44a6-b8ab-08b05a4ec5a8)"
+  ],
+  "check": "Q: Why can a statistical model never recover B itself? A: Rotational indeterminacy means B and B C describe the same model, so only the column subspace is identified."
+ },
+ {
+  "title": "Cross-sectional regression",
+  "domain": "Quant",
+  "one_line": "A fundamental model runs one regression across the assets on each date, producing a fresh vector of factor returns per day with no time-series information used at all.",
+  "depends_on": [
+   "Characteristic factor model",
+   "Weighted least squares"
+  ],
+  "sources": [
+   "EQI ch.6 §6.2, eq (6.1) to (6.3)",
+   "Fundamental Factor Models (https://claude.ai/code/artifact/ffbcd609-5980-4991-a3d5-21c17e9b5e41)",
+   "Linear Models of Returns (https://claude.ai/code/artifact/95edfc2a-c498-44a6-b8ab-08b05a4ec5a8)"
+  ],
+  "check": "Q: On a scatter of loading against return for one date, what is the factor return? A: The slope of the fitted line, and the vertical distances are that day's idiosyncratic returns."
+ },
+ {
+  "title": "Factor-mimicking portfolio",
+  "domain": "Quant",
+  "one_line": "Because an estimated factor return is a fixed weighted sum of asset returns fixed before the day starts, it is literally the return of a holdable portfolio with unit exposure to one factor and none to any other.",
+  "depends_on": [
+   "Cross-sectional regression",
+   "Dollar weights"
+  ],
+  "sources": [
+   "EQI ch.6 §6.2, ch.5 §5.3.1",
+   "Fundamental Factor Models (https://claude.ai/code/artifact/ffbcd609-5980-4991-a3d5-21c17e9b5e41)",
+   "Evaluating Risk (https://claude.ai/code/artifact/b5aa3c86-7448-44e1-83ee-911457ecc245)"
+  ],
+  "check": "Q: What is B transpose times the FMP matrix, and how well does it check? A: The identity, measured at 2.22e-16, so it is algebraic rather than approximate."
+ },
+ {
+  "title": "Estimation universe",
+  "domain": "Quant",
+  "one_line": "The estimation universe must be tradeable, well priced and relevant, and tradeability matters because a factor-mimicking portfolio holds every name in it, so one untradeable name makes the factor untradeable.",
+  "depends_on": [
+   "Characteristic factor model",
+   "Liquidity"
+  ],
+  "sources": [
+   "EQI ch.6 §6.1.2",
+   "Fundamental Factor Models (https://claude.ai/code/artifact/ffbcd609-5980-4991-a3d5-21c17e9b5e41)"
+  ],
+  "check": "Q: Why does shortening the model period shrink the universe? A: Names that cannot support a reliable price in a ten minute window drop out, so periodicity and universe cannot be chosen separately."
+ },
+ {
+  "title": "Loadings timestamp convention",
+  "domain": "Quant",
+  "one_line": "The model needs loadings known at the start of the interval, while most vendors stamp them at the end, so using them as delivered leaks the return you are trying to explain into the loading.",
+  "depends_on": [
+   "Cross-sectional regression"
+  ],
+  "sources": [
+   "EQI ch.6 §6.2 footnote 13",
+   "Fundamental Factor Models (https://claude.ai/code/artifact/ffbcd609-5980-4991-a3d5-21c17e9b5e41)"
+  ],
+  "check": "Q: What is the most common way a factor backtest produces untradeable results? A: A one line off by one indexing error on the loading timestamp."
+ },
+ {
+  "title": "Rank-deficient loadings matrix",
+  "domain": "Quant",
+  "one_line": "Industry dummies sum to a column of ones and so does the country column, so a real model's loadings matrix is exactly singular and the factor returns are not identified rather than merely imprecise.",
+  "depends_on": [
+   "Loadings matrix",
+   "Rank of a matrix"
+  ],
+  "sources": [
+   "EQI ch.6 §6.2.1",
+   "Fundamental Factor Models (https://claude.ai/code/artifact/ffbcd609-5980-4991-a3d5-21c17e9b5e41)"
+  ],
+  "check": "Q: Slide along the null direction: the country return runs from minus 1.6 to plus 50.4 percent. How much do fitted returns move? A: At most 2.78e-17, so no statistical test can prefer one answer."
+ },
+ {
+  "title": "Identification constraint on factor returns",
+  "domain": "Quant",
+  "one_line": "Adding a side constraint such as requiring the market weighted sum of industry factor returns to be zero picks one of the infinitely many perfect fits, at no cost in fit and with every factor kept.",
+  "depends_on": [
+   "Rank-deficient loadings matrix"
+  ],
+  "sources": [
+   "EQI ch.6 §6.2.1",
+   "Fundamental Factor Models (https://claude.ai/code/artifact/ffbcd609-5980-4991-a3d5-21c17e9b5e41)"
+  ],
+  "check": "Q: Does the constrained country return equal the market return? A: No; it is the market return purged of industry tilts, differing by the cap weighted style contribution plus the residual."
+ },
+ {
+  "title": "Factor return inflation",
+  "domain": "Quant",
+  "one_line": "Measured factor variance equals true factor variance plus (B transpose Omega epsilon inverse B) inverse, because a factor-mimicking portfolio holds real stocks and so carries their idiosyncratic noise.",
+  "depends_on": [
+   "Cross-sectional regression",
+   "Factor-mimicking portfolio"
+  ],
+  "sources": [
+   "EQI ch.6 §6.3, eq (6.5) to (6.7), Insight 6.2",
+   "Fundamental Factor Models (https://claude.ai/code/artifact/ffbcd609-5980-4991-a3d5-21c17e9b5e41)"
+  ],
+  "check": "Q: Which factors does the inflation hurt most and why? A: The smallest, because the correction is about the same size for every factor, running from plus 39 percent on the weakest to plus 12 percent on the strongest."
+ },
+ {
+  "title": "Dynamic conditional correlation",
+  "domain": "Quant",
+  "one_line": "DCC splits the factor covariance into time varying volatilities and a correlation matrix and estimates each with its own half-life, giving correlations the longer memory because they move more slowly than volatilities.",
+  "depends_on": [
+   "Correlation",
+   "Exponentially weighted moving average"
+  ],
+  "sources": [
+   "EQI ch.6 §6.3.2",
+   "Fundamental Factor Models (https://claude.ai/code/artifact/ffbcd609-5980-4991-a3d5-21c17e9b5e41)"
+  ],
+  "check": "Q: Which half-life is longer and what belief does that encode? A: The correlation half-life, because a crisis doubles volatilities in days while correlation structure changes over years."
+ },
+ {
+  "title": "Short-term volatility updating",
+  "domain": "Quant",
+  "one_line": "STVU adds a latent multiplier on the whole covariance driven by whether the model's own z-scored factor returns are the size it predicted, so a slow estimator can react fast without giving up its calm.",
+  "depends_on": [
+   "Dynamic conditional correlation",
+   "State-space model"
+  ],
+  "sources": [
+   "EQI ch.6 §6.3.3, eq (6.8) to (6.11)",
+   "Fundamental Factor Models (https://claude.ai/code/artifact/ffbcd609-5980-4991-a3d5-21c17e9b5e41)"
+  ],
+  "check": "Q: Volatility tripled on day 120. How long did each estimator take to reach 90 percent of the new level? A: Over 180 days for a 126 day EWMA, 39 for a 21 day one, and 19 with STVU on the slow one."
+ },
+ {
+  "title": "Idiosyncratic covariance matrix",
+  "domain": "Quant",
+  "one_line": "The idiosyncratic covariance should be diagonal or sparse because anything shared should have been a factor, and any visible structure in it is a factor the model is missing rather than an estimation nuisance.",
+  "depends_on": [
+   "Idiosyncratic returns",
+   "Covariance"
+  ],
+  "sources": [
+   "EQI ch.6 §6.4",
+   "Fundamental Factor Models (https://claude.ai/code/artifact/ffbcd609-5980-4991-a3d5-21c17e9b5e41)"
+  ],
+  "check": "Q: What does the book recommend doing to this matrix as a sanity check? A: Look at it, because striking patterns can be read as factors that should be added to the model."
+ },
+ {
+  "title": "Correlation thresholding",
+  "domain": "Quant",
+  "one_line": "Keeping a residual correlation only when it clears a threshold recovers clusters, and the right threshold is found by sweeping until the clusters are stable and interpretable rather than by a formula.",
+  "depends_on": [
+   "Idiosyncratic covariance matrix",
+   "Correlation"
+  ],
+  "sources": [
+   "EQI ch.6 §6.4.4",
+   "Fundamental Factor Models (https://claude.ai/code/artifact/ffbcd609-5980-4991-a3d5-21c17e9b5e41)"
+  ],
+  "check": "Q: Three planted clusters were recovered exactly over what range of threshold, and what did the theoretical value do? A: A plateau from 0.28 to 0.42, while the theoretical 0.16 sat below it and merged everything."
+ },
+ {
+  "title": "Winsorization of returns",
+  "domain": "Quant",
+  "one_line": "Because a factor return is the return of a mimicking portfolio, clipping a genuinely large return reports a portfolio return the portfolio did not earn, so real jumps must be kept and only bad data removed.",
+  "depends_on": [
+   "Factor-mimicking portfolio",
+   "Robust z-score"
+  ],
+  "sources": [
+   "EQI ch.6 §6.5",
+   "Fundamental Factor Models (https://claude.ai/code/artifact/ffbcd609-5980-4991-a3d5-21c17e9b5e41)"
+  ],
+  "check": "Q: One asset in 200 reported plus 200 percent from a missed split. What did that do to a style factor return? A: It moved by minus 0.02627 against a true 0.0025, wrong by 10.5 times and with the sign flipped."
+ },
+ {
+  "title": "Factor zoo",
+  "domain": "Quant",
+  "one_line": "The published factor set has expanded far beyond what any model needs, and the four standard objections are incomplete classification, testing in isolation, toy portfolio construction and reuse of the same data.",
+  "depends_on": [
+   "Characteristic factor model",
+   "Model selection"
+  ],
+  "sources": [
+   "EQI ch.6 §6.7",
+   "Fundamental Factor Models (https://claude.ai/code/artifact/ffbcd609-5980-4991-a3d5-21c17e9b5e41)"
+  ],
+  "check": "Q: Which of the four objections lets two researchers independently discover the same effect? A: Testing in isolation against a three factor benchmark, so neither controlled for the other."
+ },
+ {
+  "title": "Market factor",
+  "domain": "Quant",
+  "one_line": "The market factor is the most pervasive column, taken either as the vector of ones or as regression betas to an index, and taking it as ones is exactly what makes centring possible and the matrix singular.",
+  "depends_on": [
+   "Loadings matrix"
+  ],
+  "sources": [
+   "EQI ch.6 §6.7",
+   "Fundamental Factor Models (https://claude.ai/code/artifact/ffbcd609-5980-4991-a3d5-21c17e9b5e41)",
+   "Linear Models of Returns (https://claude.ai/code/artifact/95edfc2a-c498-44a6-b8ab-08b05a4ec5a8)"
+  ],
+  "check": "Q: What does an all ones market column do to the column space? A: It puts the ones vector inside it, which permits centring in chapter four and causes rank deficiency in chapter six."
+ },
+ {
+  "title": "Industry and country dummy factors",
+  "domain": "Quant",
+  "one_line": "Industry and country loadings are zero one variables summing to one per asset, which is why every stock's industry cells reproduce the country column exactly and the matrix loses rank.",
+  "depends_on": [
+   "Loadings matrix",
+   "Rank-deficient loadings matrix"
+  ],
+  "sources": [
+   "EQI ch.6 §6.7",
+   "Fundamental Factor Models (https://claude.ai/code/artifact/ffbcd609-5980-4991-a3d5-21c17e9b5e41)"
+  ],
+  "check": "Q: Measured on a real shaped loadings matrix, what is the maximum gap between the industry row sum and the country entry? A: Exactly zero, not merely small."
+ },
+ {
+  "title": "Momentum factor",
+  "domain": "Quant",
+  "one_line": "The momentum factor loads on trailing three to twelve month performance on the finding that past winners keep winning, and it reverses sign at horizons of a month or less.",
+  "depends_on": [
+   "Characteristic factor model"
+  ],
+  "sources": [
+   "EQI ch.6 §6.7",
+   "Fundamental Factor Models (https://claude.ai/code/artifact/ffbcd609-5980-4991-a3d5-21c17e9b5e41)"
+  ],
+  "check": "Q: What happens to the sign at a one week horizon? A: It flips to reversal, and the effect is stronger the more recent the outperformance."
+ },
+ {
+  "title": "Liquidity factor",
+  "domain": "Quant",
+  "one_line": "The liquidity factor says illiquid names outperform as compensation for risk borne during liquidity spirals, and it is loaded through a price impact measure computed from data you already have.",
+  "depends_on": [
+   "Characteristic factor model",
+   "Amihud illiquidity measure"
+  ],
+  "sources": [
+   "EQI ch.6 §6.7",
+   "Fundamental Factor Models (https://claude.ai/code/artifact/ffbcd609-5980-4991-a3d5-21c17e9b5e41)"
+  ],
+  "check": "Q: What does the Amihud measure answer in one sentence? A: How far does this stock move per dollar that trades in it, averaged over a window."
+ },
+ {
+  "title": "Principal component analysis",
+  "domain": "Quant",
+  "one_line": "PCA finds the directions of greatest portfolio variance, which are the eigenvectors of the covariance and equally the left singular vectors of the return matrix, so approximation and variance maximisation give the same answer.",
+  "depends_on": [
+   "Eigendecomposition of a symmetric matrix",
+   "Covariance",
+   "Rayleigh quotient"
+  ],
+  "sources": [
+   "EQI ch.7 §7.1.1, eq (7.7) to (7.11)",
+   "Statistical Factor Models (https://claude.ai/code/artifact/3b8a1936-8d6c-419e-9060-0420a9bdd8ae)"
+  ],
+  "check": "Q: The Lagrange multiplier in the maximum variance problem turns out to be what? A: The objective itself, v transpose Sigma v, so you want the largest eigenvalue."
+ },
+ {
+  "title": "Probabilistic PCA",
+  "domain": "Quant",
+  "one_line": "Maximising a Gaussian likelihood with equal idiosyncratic variances leaves the eigenvectors untouched, sets the idiosyncratic floor to the average discarded eigenvalue, and subtracts that average from every kept eigenvalue.",
+  "depends_on": [
+   "Principal component analysis",
+   "Maximum likelihood estimation"
+  ],
+  "sources": [
+   "EQI ch.7 §7.1.2, eq (7.13) to (7.19)",
+   "Statistical Factor Models (https://claude.ai/code/artifact/3b8a1936-8d6c-419e-9060-0420a9bdd8ae)"
+  ],
+  "check": "Q: What problem with plain truncated PCA does this fix? A: Singularity: the discarded directions get variance lambda bar instead of zero, so the matrix can be inverted."
+ },
+ {
+  "title": "Spiked covariance model",
+  "domain": "Quant",
+  "one_line": "The spiked model asserts a spectrum in two pieces, a bulk pinned at one after normalisation and a few eigenvalues growing linearly in the number of assets, which is what lets PCA separate signal from noise at all.",
+  "depends_on": [
+   "Principal component analysis",
+   "Eigenvalue detection threshold"
+  ],
+  "sources": [
+   "EQI ch.7 §7.2.1, eq (7.27)",
+   "Statistical Factor Models (https://claude.ai/code/artifact/3b8a1936-8d6c-419e-9060-0420a9bdd8ae)"
+  ],
+  "check": "Q: Why should spike eigenvalues grow like n? A: B transpose B is n times the average per asset loading second moment, which converges to a fixed matrix, so its eigenvalues scale with n."
+ },
+ {
+  "title": "Eigenvalue shrinkage",
+  "domain": "Quant",
+  "one_line": "Since a sample eigenvalue above the threshold converges to lambda plus gamma, subtracting gamma recovers the population value, and this offset is optimal in operator norm on both the covariance and its inverse.",
+  "depends_on": [
+   "Spiked covariance model",
+   "Shrinkage estimation"
+  ],
+  "sources": [
+   "EQI ch.7 §7.2.3, eq (7.33)",
+   "Statistical Factor Models (https://claude.ai/code/artifact/3b8a1936-8d6c-419e-9060-0420a9bdd8ae)"
+  ],
+  "check": "Q: Why does the rule carry a domain restriction at one plus the root of gamma? A: Below the threshold the map from population to sample eigenvalue is flat, and you cannot invert a function that is not injective."
+ },
+ {
+  "title": "Eigenvector tilt",
+  "domain": "Quant",
+  "one_line": "Above the threshold the estimated eigenvector is recovered only at an angle whose cosine is one over the root of one plus c, so even a comfortably detectable factor is found in a rotated direction.",
+  "depends_on": [
+   "Spiked covariance model",
+   "Eigenvalue detection threshold"
+  ],
+  "sources": [
+   "EQI ch.7 §7.2.2, eq (7.32)",
+   "Statistical Factor Models (https://claude.ai/code/artifact/3b8a1936-8d6c-419e-9060-0420a9bdd8ae)"
+  ],
+  "check": "Q: At factor strength 4.0 with gamma 0.5, what was the cosine between estimated and true eigenvector? A: 0.8929, not 1, so the direction is tilted even when the eigenvalue is clearly separated."
+ },
+ {
+  "title": "Number of factors",
+  "domain": "Quant",
+  "one_line": "How many factors to keep can be chosen by a spectral threshold, a scree elbow, a maximum eigenvalue gap or a penalised fit, and the four criteria routinely disagree with each other and with the truth.",
+  "depends_on": [
+   "Principal component analysis",
+   "Model selection"
+  ],
+  "sources": [
+   "EQI ch.7 §7.2.5, eq (7.37) to (7.40)",
+   "Statistical Factor Models (https://claude.ai/code/artifact/3b8a1936-8d6c-419e-9060-0420a9bdd8ae)"
+  ],
+  "check": "Q: Which direction should you err in and by how much? A: Toward too many: on one test three too few cost 14.95 percent of realised excess risk while eight too many cost 3.36 percent."
+ },
+ {
+  "title": "Factor churn",
+  "domain": "Quant",
+  "one_line": "When two eigenvalues are close, one extra day of data can swap them, so individual PCA loadings can turn over almost completely in a day even though the subspace they span barely moves.",
+  "depends_on": [
+   "Principal component analysis",
+   "Eigenvalue equation"
+  ],
+  "sources": [
+   "EQI ch.7 §7.3.2, eq (7.41) to (7.42)",
+   "Statistical Factor Models (https://claude.ai/code/artifact/3b8a1936-8d6c-419e-9060-0420a9bdd8ae)"
+  ],
+  "check": "Q: Which single use of a risk model does churn actually break? A: Performance attribution, because what factor three contributed has no stable answer if factor three was a different portfolio each day."
+ },
+ {
+  "title": "Procrustes rotation of loadings",
+  "domain": "Quant",
+  "one_line": "Choosing at each rebuild the orthonormal rotation closest to yesterday's loadings has the closed form V U transpose from the SVD of the cross product, and it removes almost all churn while changing no forecast.",
+  "depends_on": [
+   "Factor churn",
+   "Orthogonal Procrustes problem"
+  ],
+  "sources": [
+   "EQI ch.7 §7.3.2, eq (7.43)",
+   "Statistical Factor Models (https://claude.ai/code/artifact/3b8a1936-8d6c-419e-9060-0420a9bdd8ae)"
+  ],
+  "check": "Q: What did the rotation cost on the worked panel? A: Nothing: mean squared turnover fell 99.4 percent while the covariance matrix changed by 4.2e-17."
+ },
+ {
+  "title": "Sign indeterminacy of a principal component",
+  "domain": "Quant",
+  "one_line": "An eigenvector and its negative solve the same equation, so the sign a solver returns is a coin flip and any interpretation that turns on a sign needs a stateful convention fixed once and carried forward.",
+  "depends_on": [
+   "Principal component analysis"
+  ],
+  "sources": [
+   "EQI ch.7 §7.5.2",
+   "Statistical Factor Models (https://claude.ai/code/artifact/3b8a1936-8d6c-419e-9060-0420a9bdd8ae)"
+  ],
+  "check": "Q: Across 60 resamples the three components reversed on 48, 47 and 50 percent of runs. What fixed it? A: Requiring one chosen reference asset per component to load positively, which cut the rates to about zero."
+ },
+ {
+  "title": "Interpreting components by regression",
+  "domain": "Quant",
+  "one_line": "Regressing a statistical loading column on characteristics you already understand tells you what the component is made of, and the same technique interprets any risk model in terms of another.",
+  "depends_on": [
+   "Principal component analysis",
+   "Ordinary least squares"
+  ],
+  "sources": [
+   "EQI ch.7 §7.4.2",
+   "Statistical Factor Models (https://claude.ai/code/artifact/3b8a1936-8d6c-419e-9060-0420a9bdd8ae)"
+  ],
+  "check": "Q: The first component's centred R squared was 0.0104 and its uncentred one 0.8494. Why is that the finding rather than a failure? A: The component is nearly constant across assets, which is exactly what a market factor is."
+ },
+ {
+  "title": "Idiosyncratic normalisation of returns",
+  "domain": "Quant",
+  "one_line": "Dividing every return by its idiosyncratic volatility manufactures the bulk at one that every spiked model result requires, and it concentrates the spectrum so fewer components carry the variance.",
+  "depends_on": [
+   "Spiked covariance model",
+   "Idiosyncratic returns"
+  ],
+  "sources": [
+   "EQI ch.7 §7.3.1, §7.5.1, Procedure 7.1",
+   "Statistical Factor Models (https://claude.ai/code/artifact/3b8a1936-8d6c-419e-9060-0420a9bdd8ae)",
+   "Grading Our Covariance (https://claude.ai/code/artifact/3fd35969-f7f0-46d6-91ab-ceb3831ed63c)"
+  ],
+  "check": "Q: How many components reached half the variance under the three normalisations on real Russell 3000 data? A: Thirty raw, twenty by total volatility and ten by idiosyncratic volatility."
+ },
+ {
+  "title": "Volatility proxy",
+  "domain": "Quant",
+  "one_line": "Every volatility test grades a forecast against a stand-in because the true volatility is never observed, and a single squared return is an unbiased proxy whose noise is larger than the thing it measures.",
+  "depends_on": [
+   "Realized volatility",
+   "Chi-squared distribution",
+   "Bias of an estimator"
+  ],
+  "sources": [
+   "EQI ch.5 §5.1.1",
+   "Evaluating Risk (https://claude.ai/code/artifact/b5aa3c86-7448-44e1-83ee-911457ecc245)",
+   "Grading Our Covariance (https://claude.ai/code/artifact/3fd35969-f7f0-46d6-91ab-ceb3831ed63c)"
+  ],
+  "check": "Q: What are the noise to signal ratios of a squared return and of a 78 sample realized variance? A: 1.41 and 0.16, since they are the same chi-squared family at k equal to 1 and 78."
+ },
+ {
+  "title": "QLIKE",
+  "domain": "Quant",
+  "one_line": "QLIKE scores a variance forecast by the ratio of realized to forecast variance minus its log minus one, which is the Gaussian negative log-likelihood up to constants and punishes over forecasting harder than under forecasting.",
+  "depends_on": [
+   "Volatility proxy",
+   "Proper scoring rule"
+  ],
+  "sources": [
+   "EQI ch.5 §5.1.1, Fig 5.1",
+   "Evaluating Risk (https://claude.ai/code/artifact/b5aa3c86-7448-44e1-83ee-911457ecc245)",
+   "Grading Our Covariance (https://claude.ai/code/artifact/3fd35969-f7f0-46d6-91ab-ceb3831ed63c)"
+  ],
+  "check": "Q: At a 75 percent proportional miss, what does QLIKE charge each way? A: 0.6363 for over forecasting against 0.1904 for under forecasting, a ratio of 3.34."
+ },
+ {
+  "title": "MSE loss for variance forecasts",
+  "domain": "Quant",
+  "one_line": "The MSE loss weights the squared relative miss by the forecast variance, is exactly symmetric in the ratio of realized to forecast variance, and like QLIKE is minimised at the true variance.",
+  "depends_on": [
+   "Volatility proxy"
+  ],
+  "sources": [
+   "EQI ch.5 §5.1.1",
+   "Evaluating Risk (https://claude.ai/code/artifact/b5aa3c86-7448-44e1-83ee-911457ecc245)"
+  ],
+  "check": "Q: What does MSE charge at a fifty percent miss in each direction? A: 0.2500 either side, exactly symmetric, unlike QLIKE's 0.1931 against 0.0945."
+ },
+ {
+  "title": "Rank robustness of a loss",
+  "domain": "Quant",
+  "one_line": "A loss is rank robust when it orders two forecasts the same way against a noisy unbiased proxy as against the truth, a property of the function itself and therefore free to choose correctly.",
+  "depends_on": [
+   "Volatility proxy",
+   "QLIKE"
+  ],
+  "sources": [
+   "EQI ch.5 §5.1.1",
+   "Evaluating Risk (https://claude.ai/code/artifact/b5aa3c86-7448-44e1-83ee-911457ecc245)"
+  ],
+  "check": "Q: Where is mean squared error on the log of the variance minimised when fed a squared return? A: At 0.2816, about 28 percent of the true variance, so it systematically selects a model that understates risk."
+ },
+ {
+  "title": "Bias statistic",
+  "domain": "Quant",
+  "one_line": "The Bias statistic is the standard deviation of returns standardised by their forecast volatility, so it checks whether the level is right on average and cannot see whether the model knows which days are dangerous.",
+  "depends_on": [
+   "Volatility proxy"
+  ],
+  "sources": [
+   "EQI ch.5 §5.1.1 footnote",
+   "Evaluating Risk (https://claude.ai/code/artifact/b5aa3c86-7448-44e1-83ee-911457ecc245)",
+   "Grading Our Covariance (https://claude.ai/code/artifact/3fd35969-f7f0-46d6-91ab-ceb3831ed63c)"
+  ],
+  "check": "Q: What does a Bias statistic of one mean, and what can it not distinguish? A: The level is right on average; it cannot separate a model that tracks the variation from a flat line at the right average."
+ },
+ {
+  "title": "QDIST",
+  "domain": "Quant",
+  "one_line": "QDIST is the Gaussian negative log-likelihood of the whole return vector, so it needs no portfolio at all and its two terms trade off, one punishing a matrix that is too small and the other one that is too big.",
+  "depends_on": [
+   "Precision matrix",
+   "Log-likelihood",
+   "Gaussian distribution"
+  ],
+  "sources": [
+   "EQI ch.5 §5.1.2, eq (5.1), Exercise 5.1",
+   "Evaluating Risk (https://claude.ai/code/artifact/b5aa3c86-7448-44e1-83ee-911457ecc245)",
+   "Grading Our Covariance (https://claude.ai/code/artifact/3fd35969-f7f0-46d6-91ab-ceb3831ed63c)"
+  ],
+  "check": "Q: One model scores 0.76 lower than another in QDIST. What does that mean? A: It made the observed cross-section about e to the 0.76, roughly 2.1 times, more likely on a typical day."
+ },
+ {
+  "title": "Minimum-variance test of a covariance matrix",
+  "domain": "Quant",
+  "one_line": "Building the lowest variance portfolio under a candidate matrix and measuring its realised variance can only do worse than the truth, with equality exactly when the candidate is proportional to the truth.",
+  "depends_on": [
+   "Minimum-variance portfolio",
+   "Jensen's inequality"
+  ],
+  "sources": [
+   "EQI ch.5 §5.2.1, Theorem 5.1",
+   "Evaluating Risk (https://claude.ai/code/artifact/b5aa3c86-7448-44e1-83ee-911457ecc245)",
+   "Grading Our Covariance (https://claude.ai/code/artifact/3fd35969-f7f0-46d6-91ab-ceb3831ed63c)"
+  ],
+  "check": "Q: What does the proof reduce the variance ratio to, and what closes it? A: E[xi] times E[1 over xi] over the mismatch ratios, closed by Jensen since 1 over x is convex."
+ },
+ {
+  "title": "Mahalanobis distance",
+  "domain": "Quant",
+  "one_line": "Mahalanobis distance measures a return vector in units of the model's own uncertainty by multiplying by the inverse square root of the covariance, which turns the ellipse of returns into a circle.",
+  "depends_on": [
+   "Precision matrix",
+   "Matrix square root"
+  ],
+  "sources": [
+   "EQI ch.5 §5.2.2",
+   "Evaluating Risk (https://claude.ai/code/artifact/b5aa3c86-7448-44e1-83ee-911457ecc245)",
+   "Grading Our Covariance (https://claude.ai/code/artifact/3fd35969-f7f0-46d6-91ab-ceb3831ed63c)"
+  ],
+  "check": "Q: Why is the exponent a half rather than a whole? A: Because covariance eats the transform twice, so the matrix must square to Omega inverse, and a full inverse would cancel twice."
+ },
+ {
+  "title": "MALV",
+  "domain": "Quant",
+  "one_line": "MALV is the variance across days of the Mahalanobis statistic divided by the number of assets, benchmarked against two over n, and it is deliberately blind to a pure scaling of the matrix.",
+  "depends_on": [
+   "Mahalanobis distance",
+   "Chi-squared distribution"
+  ],
+  "sources": [
+   "EQI ch.5 §5.2.2",
+   "Evaluating Risk (https://claude.ai/code/artifact/b5aa3c86-7448-44e1-83ee-911457ecc245)",
+   "Grading Our Covariance (https://claude.ai/code/artifact/3fd35969-f7f0-46d6-91ab-ceb3831ed63c)"
+  ],
+  "check": "Q: Multiplying a correct matrix by 100 improved MALV ten thousand fold. What single number gives the trick away? A: The mean of the statistic, which fell to 0.0100 when a correct model puts it at 1."
+ },
+ {
+  "title": "Predicted beta",
+  "domain": "Quant",
+  "one_line": "The predicted beta of every asset to a reference portfolio is Omega w divided by w transpose Omega w, a forecast built entirely from the covariance matrix with no returns in it at all.",
+  "depends_on": [
+   "Factor covariance identity",
+   "Covariance"
+  ],
+  "sources": [
+   "EQI ch.5 §5.3.2",
+   "Evaluating Risk (https://claude.ai/code/artifact/b5aa3c86-7448-44e1-83ee-911457ecc245)",
+   "Grading Our Covariance (https://claude.ai/code/artifact/3fd35969-f7f0-46d6-91ab-ceb3831ed63c)"
+  ],
+  "check": "Q: A name realised beta 1.518 and a diagonal model predicted 3.244. What does the hedge leave on the book? A: It overshoots by 1.726 units, leaving 47 percent of the asset's own daily risk still there."
+ },
+ {
+  "title": "Model turnover",
+  "domain": "Quant",
+  "one_line": "Model turnover measures how much the factor-mimicking portfolio recipe changes between rebuilds, since every change is a trade even when nothing about the manager's views moved.",
+  "depends_on": [
+   "Factor-mimicking portfolio",
+   "Frobenius norm"
+  ],
+  "sources": [
+   "EQI ch.5 §5.3.1",
+   "Evaluating Risk (https://claude.ai/code/artifact/b5aa3c86-7448-44e1-83ee-911457ecc245)",
+   "Grading Our Covariance (https://claude.ai/code/artifact/3fd35969-f7f0-46d6-91ab-ceb3831ed63c)"
+  ],
+  "check": "Q: Two models fit the cross-section equally well but averaged Frobenius turnover 0.0709 and 0.0048. What is the cost gap at ten basis points a side? A: About 349 basis points a year, bought with no improvement in accuracy."
+ },
+ {
+  "title": "Coefficient of determination in a factor model",
+  "domain": "Quant",
+  "one_line": "R squared cannot select a factor model, because there is no holdout when factor returns are re-estimated every period, because adding random columns always improves it, and because a sign flipping rotation preserves it while destroying the factor correlations.",
+  "depends_on": [
+   "Cross-sectional regression",
+   "Rotational indeterminacy"
+  ],
+  "sources": [
+   "EQI ch.5 §5.3.3",
+   "Evaluating Risk (https://claude.ai/code/artifact/b5aa3c86-7448-44e1-83ee-911457ecc245)"
+  ],
+  "check": "Q: Two models had identical R squared to ten decimals and the same parameter count. What differed? A: The estimated factor correlations, whose largest entry collapsed from 0.4557 to 0.0127."
+ },
+ {
+  "title": "Slippage reserve",
+  "domain": "Quant",
+  "one_line": "A slippage reserve is cash held back before the optimizer runs, equal to a spread toll plus an impact term plus a confidence multiple of the drift standard deviation of the trade vector.",
+  "depends_on": [
+   "Dollar weights",
+   "Covariance",
+   "Market impact"
+  ],
+  "sources": [
+   "How Markets Move (https://claude.ai/code/artifact/e08581d6-81ec-42f3-9379-fb93f4d2dc3f)"
+  ],
+  "check": "Q: A trade whose plan aimed exactly at a cash floor missed it by 6,055 dollars. How large a draw was that? A: About 0.85 standard deviations, an entirely ordinary move against a flat 500 dollar cushion."
+ },
+ {
+  "title": "Share of stock",
+  "domain": "Markets and Economics",
+  "one_line": "A share is a small identical ownership slice of a company, a legal claim on a real business cut thin enough to trade, and a market simply adds a standing crowd willing to take the other side at any moment.",
+  "depends_on": [],
+  "sources": [
+   "How Markets Move (https://claude.ai/code/artifact/e08581d6-81ec-42f3-9379-fb93f4d2dc3f)"
+  ],
+  "check": "Q: Apple is cut into roughly fifteen billion shares. What does owning one entitle you to? A: About one fifteen billionth of everything Apple is, including its future profits and any dividends."
+ },
+ {
+  "title": "Order book",
+  "domain": "Markets and Economics",
+  "one_line": "The exchange keeps every standing limit order in one sorted list, buyers with the highest price on top and sellers with the lowest, so the book is a queue of promises rather than a chart of prices.",
+  "depends_on": [
+   "Share of stock"
+  ],
+  "sources": [
+   "How Markets Move (https://claude.ai/code/artifact/e08581d6-81ec-42f3-9379-fb93f4d2dc3f)"
+  ],
+  "check": "Q: Between trades, is there a single price? A: No; only two walls of standing offers and a gap, and the number on a screen is the last trade, already history."
+ },
+ {
+  "title": "Bid and ask",
+  "domain": "Markets and Economics",
+  "one_line": "The best bid is the highest price any buyer is offering and the best ask the lowest price any seller will accept, and a trade happens only when a new order is willing to cross between them.",
+  "depends_on": [
+   "Order book"
+  ],
+  "sources": [
+   "EQI ch.2 §2.1.4",
+   "How Markets Move (https://claude.ai/code/artifact/e08581d6-81ec-42f3-9379-fb93f4d2dc3f)",
+   "The Coordinates of a Return (https://claude.ai/code/artifact/ef6ce45a-28c7-4b01-b1ab-b3431532bf22)"
+  ],
+  "check": "Q: Whether the next print is a buyer lifting the ask or a seller hitting the bid is close to what? A: A coin flip, which is why the printed price alternates even when nothing about the asset has changed."
+ },
+ {
+  "title": "Limit order",
+  "domain": "Markets and Economics",
+  "one_line": "A limit order says trade with me only at my price or better, so it controls the price but not whether or when it trades, and that patience is the raw material the whole book is built from.",
+  "depends_on": [
+   "Order book"
+  ],
+  "sources": [
+   "How Markets Move (https://claude.ai/code/artifact/e08581d6-81ec-42f3-9379-fb93f4d2dc3f)"
+  ],
+  "check": "Q: What does a limit order give up in exchange for price control? A: Certainty of execution; it may sit all day and never trade at all."
+ },
+ {
+  "title": "Market order",
+  "domain": "Markets and Economics",
+  "one_line": "A market order says trade now at whatever the standing prices are, so it guarantees execution and surrenders control of the price, which is exactly the impatience the spread charges for.",
+  "depends_on": [
+   "Order book",
+   "Bid and ask"
+  ],
+  "sources": [
+   "How Markets Move (https://claude.ai/code/artifact/e08581d6-81ec-42f3-9379-fb93f4d2dc3f)"
+  ],
+  "check": "Q: Which order type pays the spread and which one earns it? A: The market order pays about half the spread; the resting limit order is the side being crossed."
+ },
+ {
+  "title": "Spread",
+  "domain": "Markets and Economics",
+  "one_line": "The spread is the gap between the best bid and the best ask, and it exists because nobody in the book wants to trade at a loss, so it is the cost of demanding immediacy.",
+  "depends_on": [
+   "Bid and ask"
+  ],
+  "sources": [
+   "How Markets Move (https://claude.ai/code/artifact/e08581d6-81ec-42f3-9379-fb93f4d2dc3f)",
+   "The Coordinates of a Return (https://claude.ai/code/artifact/ef6ce45a-28c7-4b01-b1ab-b3431532bf22)"
+  ],
+  "check": "Q: Roughly how much of the spread do you pay by trading immediately? A: About half of it, measured against the mid, and nobody bills you because it is baked into the price you got."
+ },
+ {
+  "title": "Spread in basis points",
+  "domain": "Markets and Economics",
+  "one_line": "Quoting the spread as ask minus bid over the mid times ten thousand makes it comparable across stocks at different prices, and it tracks liquidity and risk rather than the price level.",
+  "depends_on": [
+   "Spread"
+  ],
+  "sources": [
+   "How Markets Move (https://claude.ai/code/artifact/e08581d6-81ec-42f3-9379-fb93f4d2dc3f)"
+  ],
+  "check": "Q: A 329 dollar stock showed a 1.38 dollar gap and a 22 dollar stock a one cent gap. Which market is wider in basis points? A: The expensive one, at 41.9 bps against 4.6 bps."
+ },
+ {
+  "title": "Depth of the book",
+  "domain": "Markets and Economics",
+  "one_line": "Depth is how many shares are resting at each price rung, and a thin book means the same order flow moves the price much further than it would on a deep one.",
+  "depends_on": [
+   "Order book"
+  ],
+  "sources": [
+   "How Markets Move (https://claude.ai/code/artifact/e08581d6-81ec-42f3-9379-fb93f4d2dc3f)"
+  ],
+  "check": "Q: A crash is often described as more selling than usual. What is the better description? A: The same selling into a book that had gotten far thinner."
+ },
+ {
+  "title": "Walking the ladder",
+  "domain": "Markets and Economics",
+  "one_line": "A market order larger than the size resting at the best price consumes that rung and climbs to the next, so its average fill price is the share weighted average of every rung it ate.",
+  "depends_on": [
+   "Market order",
+   "Depth of the book"
+  ],
+  "sources": [
+   "How Markets Move (https://claude.ai/code/artifact/e08581d6-81ec-42f3-9379-fb93f4d2dc3f)"
+  ],
+  "check": "Q: You market buy 1,000 shares with only 300 offered at the best ask. What decides your average price? A: The prices of the successive rungs your order consumed, which is a first taste of market impact."
+ },
+ {
+  "title": "Market maker",
+  "domain": "Markets and Economics",
+  "one_line": "A market maker continuously posts both a bid and an ask on the same stock and earns the gap, running a shop rather than doing anyone a favour, and their competition is why spreads on liquid names are a penny.",
+  "depends_on": [
+   "Limit order",
+   "Spread"
+  ],
+  "sources": [
+   "How Markets Move (https://claude.ai/code/artifact/e08581d6-81ec-42f3-9379-fb93f4d2dc3f)"
+  ],
+  "check": "Q: Who provides most of the resting liquidity in a book? A: Professional market makers quoting both sides at machine speed, undercutting each other for queue position."
+ },
+ {
+  "title": "Inventory risk",
+  "domain": "Markets and Economics",
+  "one_line": "A maker who buys must hold the shares until an impatient buyer appears, so when a stock becomes volatile the maker protects itself the only way it can, by widening its spread and shrinking its quoted size.",
+  "depends_on": [
+   "Market maker"
+  ],
+  "sources": [
+   "How Markets Move (https://claude.ai/code/artifact/e08581d6-81ec-42f3-9379-fb93f4d2dc3f)"
+  ],
+  "check": "Q: Why does the same stock have a wide thin market in a storm and a tight deep one on a calm afternoon? A: Inventory held through a volatile stretch is dangerous, so makers quote the storm rather than the average."
+ },
+ {
+  "title": "Market impact",
+  "domain": "Markets and Economics",
+  "one_line": "Market impact is the price move you cause yourself by showing up with a large order, distinct from the spread you cross, and it is what makes the Sharpe ratio a decreasing function of size.",
+  "depends_on": [
+   "Walking the ladder"
+  ],
+  "sources": [
+   "EQI ch.3 §3.4",
+   "How Markets Move (https://claude.ai/code/artifact/e08581d6-81ec-42f3-9379-fb93f4d2dc3f)",
+   "Four Numbers and What They Threw Away (https://claude.ai/code/artifact/0b20a92e-dc03-4b4c-aa3e-0a8a0c320608)"
+  ],
+  "check": "Q: Why does leverage leave the Sharpe ratio unchanged while size does not? A: Leverage scales return and volatility equally, while size trades larger quantities of the same names and the impact eats the gross edge."
+ },
+ {
+  "title": "Square root law of market impact",
+  "domain": "Markets and Economics",
+  "one_line": "The standard impact model scales the cost with volatility times the square root of participation times the traded amount, so it is a rounding error at tiny participation and dominant at large.",
+  "depends_on": [
+   "Market impact",
+   "Liquidity"
+  ],
+  "sources": [
+   "How Markets Move (https://claude.ai/code/artifact/e08581d6-81ec-42f3-9379-fb93f4d2dc3f)"
+  ],
+  "check": "Q: Six buys each under 0.03 percent participation produced what total impact leg? A: About 326 dollars, negligible, but the same formula explodes once participation reaches a few percent of daily volume."
+ },
+ {
+  "title": "Liquidity",
+  "domain": "Markets and Economics",
+  "one_line": "Liquidity is how much can trade without moving the price, read jointly from the depth of the book and the tightness of the spread, and it is what spreads actually track rather than price or volatility alone.",
+  "depends_on": [
+   "Depth of the book",
+   "Spread"
+  ],
+  "sources": [
+   "How Markets Move (https://claude.ai/code/artifact/e08581d6-81ec-42f3-9379-fb93f4d2dc3f)",
+   "Fundamental Factor Models (https://claude.ai/code/artifact/ffbcd609-5980-4991-a3d5-21c17e9b5e41)"
+  ],
+  "check": "Q: The tightest spreads in a real sample sat on SPY and NVDA, one calm and one volatile. What do they share? A: They are the most heavily traded, so competition crushes the gap regardless of volatility."
+ },
+ {
+  "title": "Amihud illiquidity measure",
+  "domain": "Markets and Economics",
+  "one_line": "The Amihud measure averages absolute return divided by dollar volume, answering how far a stock moves per dollar that trades in it, a price impact measure needing no order book data.",
+  "depends_on": [
+   "Liquidity"
+  ],
+  "sources": [
+   "EQI ch.6 §6.7",
+   "Fundamental Factor Models (https://claude.ai/code/artifact/ffbcd609-5980-4991-a3d5-21c17e9b5e41)"
+  ],
+  "check": "Q: What makes this measure standard despite its crudeness? A: It is computable entirely from daily data you already store, with no order book feed required."
+ },
+ {
+  "title": "Block order",
+  "domain": "Markets and Economics",
+  "one_line": "Grouping the same stock across many client accounts into one order gives every account the same average fill price, and the fairness costs a delay between the moment a trade is priced and the moment it fills.",
+  "depends_on": [
+   "Market order"
+  ],
+  "sources": [
+   "How Markets Move (https://claude.ai/code/artifact/e08581d6-81ec-42f3-9379-fb93f4d2dc3f)"
+  ],
+  "check": "Q: What does the block buy and what does it cost? A: It buys fairness across accounts and costs time, in which prices wander away from the number the plan used."
+ },
+ {
+  "title": "Custodian",
+  "domain": "Markets and Economics",
+  "one_line": "The custodian is the vault that actually holds the accounts, both shares and cash, and settles each trade after it matches, sitting downstream of the broker and the exchange.",
+  "depends_on": [
+   "Share of stock"
+  ],
+  "sources": [
+   "How Markets Move (https://claude.ai/code/artifact/e08581d6-81ec-42f3-9379-fb93f4d2dc3f)"
+  ],
+  "check": "Q: Name the pipeline from a trading decision to a settled position. A: Decision to broker to exchange and matching engine, then settlement at the custodian holding the account."
+ },
+ {
+  "title": "Circuit breaker",
+  "domain": "Markets and Economics",
+  "one_line": "A market wide circuit breaker halts all trading for fifteen minutes when the index falls seven percent from the prior close, a safety valve for exactly the case where every book empties at once.",
+  "depends_on": [
+   "Order book"
+  ],
+  "sources": [
+   "How Markets Move (https://claude.ai/code/artifact/e08581d6-81ec-42f3-9379-fb93f4d2dc3f)"
+  ],
+  "check": "Q: How often did the circuit breaker fire in March 2020 against its whole prior history? A: Four times in ten days, against once in the previous 23 years."
+ },
+ {
+  "title": "Short selling",
+  "domain": "Markets and Economics",
+  "one_line": "Shorting borrows shares, sells them now and buys them back later, so the loss if the price rises is unbounded because the position must eventually be closed at whatever the price then is.",
+  "depends_on": [
+   "Share of stock"
+  ],
+  "sources": [
+   "How Markets Move (https://claude.ai/code/artifact/e08581d6-81ec-42f3-9379-fb93f4d2dc3f)"
+  ],
+  "check": "Q: Why is a short position asymmetric in risk? A: The gain is capped at the full price falling to zero while the loss is unlimited on the upside."
+ },
+ {
+  "title": "Short squeeze",
+  "domain": "Markets and Economics",
+  "one_line": "When short interest is crowded, a rising price forces shorts to buy to cap their losses, and buying to close a short is still buying, so the move feeds itself until the forcing stops.",
+  "depends_on": [
+   "Short selling"
+  ],
+  "sources": [
+   "How Markets Move (https://claude.ai/code/artifact/e08581d6-81ec-42f3-9379-fb93f4d2dc3f)"
+  ],
+  "check": "Q: What ends a squeeze? A: The mechanical fuel being cut, as when brokers restricted buying in January 2021 and the price collapsed almost as fast as it rose."
+ },
+ {
+  "title": "GameStop squeeze",
+  "domain": "Markets and Economics",
+  "one_line": "In January 2021 a stock trading near sixteen dollars printed an intraday high of 483 dollars because short interest exceeded the free float and forced covering fed on itself, with nothing to do with the business.",
+  "depends_on": [
+   "Short squeeze"
+  ],
+  "sources": [
+   "How Markets Move (https://claude.ai/code/artifact/e08581d6-81ec-42f3-9379-fb93f4d2dc3f)"
+  ],
+  "check": "Q: What general mechanism does this episode illustrate? A: Forced flows, trades made because a position compelled them, which are price insensitive by definition."
+ },
+ {
+  "title": "Liquidity vacuum",
+  "domain": "Markets and Economics",
+  "one_line": "When everyone demands immediacy at once and makers withdraw, the same order flow walks down an empty ladder, so the move is partly an illusion of price and often snaps back once liquidity returns.",
+  "depends_on": [
+   "Depth of the book",
+   "Inventory risk"
+  ],
+  "sources": [
+   "How Markets Move (https://claude.ai/code/artifact/e08581d6-81ec-42f3-9379-fb93f4d2dc3f)"
+  ],
+  "check": "Q: What is the signature of a liquidity vacuum on a chart? A: Extreme intraday range followed by a fast partial reversal, unlike an information move which stays."
+ },
+ {
+  "title": "COVID crash",
+  "domain": "Markets and Economics",
+  "one_line": "Between February and March 2020 the S and P fell about 34 percent in five weeks, a blend of genuine repricing under enormous uncertainty and a dash for cash that emptied every book at once.",
+  "depends_on": [
+   "Liquidity vacuum",
+   "Circuit breaker"
+  ],
+  "sources": [
+   "How Markets Move (https://claude.ai/code/artifact/e08581d6-81ec-42f3-9379-fb93f4d2dc3f)"
+  ],
+  "check": "Q: What was SPY's worst single session of the episode? A: 2020-03-16, closing down 10.9 percent, one of four circuit breaker days in ten."
+ },
+ {
+  "title": "Information gap",
+  "domain": "Markets and Economics",
+  "one_line": "New facts arriving all at once are repriced between the close and the next open, so the price teleports rather than sliding, and the move is permanent rather than reversed.",
+  "depends_on": [
+   "Share of stock"
+  ],
+  "sources": [
+   "How Markets Move (https://claude.ai/code/artifact/e08581d6-81ec-42f3-9379-fb93f4d2dc3f)"
+  ],
+  "check": "Q: Meta fell 26.4 percent on 2022-02-03. Could a trader have sold at 300 on the way down? A: No; it closed at 323 and opened near 245 with essentially no trading in between."
+ },
+ {
+  "title": "Volatility clustering",
+  "domain": "Markets and Economics",
+  "one_line": "Large moves tend to be followed by large moves of either sign and small by small, so returns forget direction instantly and remember magnitude for months.",
+  "depends_on": [
+   "Autocorrelation function",
+   "Inventory risk"
+  ],
+  "sources": [
+   "EQI ch.2 §2.1.5 fact 3",
+   "The Coordinates of a Return (https://claude.ai/code/artifact/ef6ce45a-28c7-4b01-b1ab-b3431532bf22)",
+   "The Anatomy of a Return (https://claude.ai/code/artifact/7167b6ba-321d-41f4-803d-a132a611922d)",
+   "How Markets Move (https://claude.ai/code/artifact/e08581d6-81ec-42f3-9379-fb93f4d2dc3f)"
+  ],
+  "check": "Q: Give the feedback mechanism in one chain. A: Uncertainty rises, makers widen and thin the book, the same flow moves price more, measured volatility rises, and makers thin further."
+ },
+ {
+  "title": "Heavy tails of equity returns",
+  "domain": "Markets and Economics",
+  "one_line": "Equity returns have power law tails with a tail index near four, so the variance exists comfortably, its own standard error barely exists, and the shape of the tail cannot be measured at all.",
+  "depends_on": [
+   "Tail index",
+   "Simple return"
+  ],
+  "sources": [
+   "EQI ch.2 §2.1.5 fact 2, Table 2.1",
+   "The Coordinates of a Return (https://claude.ai/code/artifact/ef6ce45a-28c7-4b01-b1ab-b3431532bf22)",
+   "The Anatomy of a Return (https://claude.ai/code/artifact/7167b6ba-321d-41f4-803d-a132a611922d)",
+   "Four Numbers and What They Threw Away (https://claude.ai/code/artifact/0b20a92e-dc03-4b4c-aa3e-0a8a0c320608)"
+  ],
+  "check": "Q: Why did the book print bootstrap intervals rather than point estimates of kurtosis? A: One interval ran from 12.8 to 48.1, telling you the tails are heavy and that you cannot pin down how heavy."
+ },
+ {
+  "title": "Absence of return autocorrelation",
+  "domain": "Markets and Economics",
+  "one_line": "Lagged autocorrelations of returns are small except at intraday scales where microstructure intrudes, but zero autocorrelation implies neither independence nor unpredictability.",
+  "depends_on": [
+   "Autocorrelation function",
+   "Simple return"
+  ],
+  "sources": [
+   "EQI ch.2 §2.1.5 fact 1",
+   "The Coordinates of a Return (https://claude.ai/code/artifact/ef6ce45a-28c7-4b01-b1ab-b3431532bf22)",
+   "The Anatomy of a Return (https://claude.ai/code/artifact/7167b6ba-321d-41f4-803d-a132a611922d)"
+  ],
+  "check": "Q: A daily cross-sectional forecast has an R squared under one percent. Why is that a business? A: Information ratio is roughly the information coefficient times the root of the number of independent bets, so 2 percent across 1,500 names 250 times a year works."
+ },
+ {
+  "title": "Aggregational Gaussianity",
+  "domain": "Markets and Economics",
+  "one_line": "Aggregating returns over longer horizons makes their distribution closer to Gaussian, which tells you the fat tails came from a varying variance rather than from the innovations themselves.",
+  "depends_on": [
+   "Central limit theorem",
+   "Log return"
+  ],
+  "sources": [
+   "EQI ch.2 §2.1.5 fact 4",
+   "The Coordinates of a Return (https://claude.ai/code/artifact/ef6ce45a-28c7-4b01-b1ab-b3431532bf22)",
+   "The Anatomy of a Return (https://claude.ai/code/artifact/7167b6ba-321d-41f4-803d-a132a611922d)"
+  ],
+  "check": "Q: Simulated kurtosis ran 5.4 daily, 4.4 quarterly and 3.3 annual. What does the decay imply about the source of the tails? A: They are produced by something that averages out, namely variation in sigma, since sums of power tailed variables keep their index."
+ },
+ {
+  "title": "Intraday U-shape",
+  "domain": "Markets and Economics",
+  "one_line": "Volatility and spreads are highest at the open, calm through midday and tightest just before the close, because overnight news is still being digested early and competition is fiercest late.",
+  "depends_on": [
+   "Spread",
+   "Inventory risk"
+  ],
+  "sources": [
+   "How Markets Move (https://claude.ai/code/artifact/e08581d6-81ec-42f3-9379-fb93f4d2dc3f)"
+  ],
+  "check": "Q: Roughly how much tighter are spreads at the close than the open in published measurements? A: About four times, which is why disclosed methodologies concentrate trading in the closing window."
+ },
+ {
+  "title": "Square root of time scaling",
+  "domain": "Markets and Economics",
+  "one_line": "Because variances add over uncorrelated periods, the typical distance a price has wandered grows with the square root of elapsed time, so most of the uncertainty you will face arrives early.",
+  "depends_on": [
+   "Variance of a sum",
+   "Volatility clustering"
+  ],
+  "sources": [
+   "EQI ch.2 §2.1.1",
+   "The Coordinates of a Return (https://claude.ai/code/artifact/ef6ce45a-28c7-4b01-b1ab-b3431532bf22)",
+   "How Markets Move (https://claude.ai/code/artifact/e08581d6-81ec-42f3-9379-fb93f4d2dc3f)",
+   "The Anatomy of a Return (https://claude.ai/code/artifact/7167b6ba-321d-41f4-803d-a132a611922d)"
+  ],
+  "check": "Q: At 1.2 percent a day over 252 days, what is the annual volatility and what would no cancellation give? A: About 19 percent against 302 percent, which is the whole difference between root T and T."
+ },
+ {
+  "title": "Satisficing versus optimising",
+  "domain": "Optimization",
+  "one_line": "To satisfice is to stop at the first option that is good enough, which needs no single scale, whereas to optimise you must first collapse every competing consideration into one number to maximise.",
+  "depends_on": [],
+  "sources": [
+   "EQI ch.3 §3.1",
+   "Four Numbers and What They Threw Away (https://claude.ai/code/artifact/0b20a92e-dc03-4b4c-aa3e-0a8a0c320608)"
+  ],
+  "check": "Q: Why can an optimizer not be handed high return and low risk? A: That is two directions, not one, so there is no direction to climb until somebody collapses the pair into a scalar."
+ },
+ {
+  "title": "Efficient frontier",
+  "domain": "Optimization",
+  "one_line": "The efficient frontier is the upper left boundary of the achievable risk and return pairs, and every point on it is optimal for some tradeoff, so nothing in the data alone picks one.",
+  "depends_on": [
+   "Volatility as a risk measure",
+   "Expected return of a strategy"
+  ],
+  "sources": [
+   "Four Numbers and What They Threw Away (https://claude.ai/code/artifact/0b20a92e-dc03-4b4c-aa3e-0a8a0c320608)",
+   "The Second Moment (https://claude.ai/code/artifact/f752817b-76e9-4098-af91-44dde50e19de)"
+  ],
+  "check": "Q: In unconstrained active space the efficient set is what shape, and what is its slope? A: A straight ray whose slope is the information ratio, on which every lambda lands somewhere."
+ },
+ {
+  "title": "Objective and constraint interchangeability",
+  "domain": "Optimization",
+  "one_line": "Capping risk and charging for risk select the same portfolio, because the Lagrange multiplier on the constraint is exactly the price in the objective, and sweeping the price traces the whole frontier.",
+  "depends_on": [
+   "Lagrangian",
+   "Efficient frontier"
+  ],
+  "sources": [
+   "EQI ch.3 §3.1",
+   "Four Numbers and What They Threw Away (https://claude.ai/code/artifact/0b20a92e-dc03-4b4c-aa3e-0a8a0c320608)"
+  ],
+  "check": "Q: What practical statement follows from the one to one correspondence? A: A risk limit is a hidden opinion about price and a risk charge a hidden opinion about limits; you never escape choosing."
+ },
+ {
+  "title": "Lagrange multiplier as the optimised value",
+  "domain": "Optimization",
+  "one_line": "In the maximum variance problem the multiplier turns out to equal v transpose Sigma v, which is the objective itself, so the usually meaningless accounting device is the quantity being maximised.",
+  "depends_on": [
+   "Lagrangian",
+   "Rayleigh quotient"
+  ],
+  "sources": [
+   "EQI ch.7 §7.1.1",
+   "Statistical Factor Models (https://claude.ai/code/artifact/3b8a1936-8d6c-419e-9060-0420a9bdd8ae)"
+  ],
+  "check": "Q: How do you see which eigenvector solves the maximum variance problem? A: Multiply the stationarity condition by v transpose, find lambda equals the objective, and take the largest eigenvalue."
+ },
+ {
+  "title": "Maximum variance portfolio problem",
+  "domain": "Optimization",
+  "one_line": "Maximising the variance of a unit norm portfolio has stationary points exactly at the eigenvectors of the covariance matrix, which is the second and equivalent definition of a principal component.",
+  "depends_on": [
+   "Lagrangian",
+   "Rayleigh quotient",
+   "Dollar weights"
+  ],
+  "sources": [
+   "EQI ch.7 §7.1.1, eq (7.7) to (7.8)",
+   "Statistical Factor Models (https://claude.ai/code/artifact/3b8a1936-8d6c-419e-9060-0420a9bdd8ae)"
+  ],
+  "check": "Q: Why is the norm constraint necessary and why does it always bind? A: Without it the variance is unbounded, and scaling up strictly increases a quadratic objective so the optimum sits on the boundary."
+ },
+ {
+  "title": "Best low rank approximation",
+  "domain": "Optimization",
+  "one_line": "Finding the closest rank m matrix is an optimisation over two unknown matrices that collapses to a rank constraint, and Eckart-Young gives it a closed form so nothing has to be searched.",
+  "depends_on": [
+   "Eckart-Young theorem",
+   "Frobenius norm"
+  ],
+  "sources": [
+   "EQI ch.7 §7.1.1, eq (7.1) to (7.2)",
+   "Statistical Factor Models (https://claude.ai/code/artifact/3b8a1936-8d6c-419e-9060-0420a9bdd8ae)"
+  ],
+  "check": "Q: At rank four the truncated SVD left squared error 634.94 and a random rank four basis left 9172.56. What is the useful content of the theorem? A: Not that the SVD is good, but that the optimisation has a closed form answer."
+ },
+ {
+  "title": "Minimum-variance portfolio",
+  "domain": "Optimization",
+  "one_line": "Minimising w transpose Omega w subject to one linear constraint gives a portfolio pointing along Omega inverse times the constraint vector, so the answer depends on the inverse and is unchanged by scaling the matrix.",
+  "depends_on": [
+   "Precision matrix",
+   "Lagrangian",
+   "Dollar weights"
+  ],
+  "sources": [
+   "EQI ch.5 §5.2.1, eq (5.2) to (5.3)",
+   "Evaluating Risk (https://claude.ai/code/artifact/b5aa3c86-7448-44e1-83ee-911457ecc245)",
+   "Grading Our Covariance (https://claude.ai/code/artifact/3fd35969-f7f0-46d6-91ab-ceb3831ed63c)"
+  ],
+  "check": "Q: Why is this test blind to a matrix that is uniformly the wrong size? A: Scaling the objective does not move its argmin, so a matrix overstating every risk by thirty percent produces exactly the same portfolio."
+ },
+ {
+  "title": "Orthogonal Procrustes problem",
+  "domain": "Optimization",
+  "one_line": "Finding the orthonormal matrix that brings one matrix closest to another reduces to maximising a trace, and the answer is V U transpose from the SVD of their cross product.",
+  "depends_on": [
+   "Singular value decomposition",
+   "Frobenius norm"
+  ],
+  "sources": [
+   "EQI ch.7 §7.3.2, eq (7.43)",
+   "Statistical Factor Models (https://claude.ai/code/artifact/3b8a1936-8d6c-419e-9060-0420a9bdd8ae)"
+  ],
+  "check": "Q: Why does the objective collapse to a single trace? A: Two of the four expanded terms contain no X and the remaining two are equal, leaving trace(A X) to maximise."
+ },
+ {
+  "title": "Endogenous cost in a budget constraint",
+  "domain": "Optimization",
+  "one_line": "A cost term that depends on the solution being computed makes the constraint's right hand side move as the optimizer works, so the objective and the accounting can never reconcile and costs belong in the objective instead.",
+  "depends_on": [
+   "Objective and constraint interchangeability"
+  ],
+  "sources": [
+   "How Markets Move (https://claude.ai/code/artifact/e08581d6-81ec-42f3-9379-fb93f4d2dc3f)"
+  ],
+  "check": "Q: What is the design rule that falls out? A: Solution dependent costs go in the objective and the cash constraint takes only precomputed constants, or the solver treats the cost as a pseudo return."
+ }
+]
